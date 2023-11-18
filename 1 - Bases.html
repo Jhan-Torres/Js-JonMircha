@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <h1>Js</h1>
+        <script>
+        /*VARIABLES*/
+            var global = 'ANA'; /* var -> Variables globales, se enlaza al objeto global (WINDOW)*/
+            //console.log(window); /* OBJETO GLOBAL  */
+            let scope = 'CRIs'; /* let -> variables de bloque */
+            const PI = 3.14159; /* const -> constantes, no pueden ser vacías (se deben inicializar sí o sí)*/
+        </script>
+
+        <!-- TIPOS DE DATOS PRIMITIVOS -->
+        <script>
+        /*CADENAS DE TEXTO*/
+            let nombre = "Jhan";     
+            let apellido = 'Torres'; 
+            let apellido2 = `Edquen`; /*CADENA CREADA CON UNA PLANTILLA LITERAL (``) Y SE PUEDE INTERPOLAR*/
+            /* NOTA: LAS 3 CADENAS CREADAS ANTERIORMENTE SON DATOS PRIMITIVOS Y NO IMPORTA SI USAMOS "", '' O `` PARA CREARLAS */    
+ 
+            let saludo = new String("Jhan Torres Edquen");
+            /* NOTA: LAS CADENA CREADA ANTERIORMENTE NO ES UN DATO PRIMITIVO, ES UN OBJETO, Y SE HA CREADO USANDO EL CONSTRUCTOR */    
+            
+            /* CONCATENACIÓN DE VARIABLES */
+                let miNombre = "Jhan";
+                let miApellido = "Torres";
+                let miSaludo = "Hola, mi nombre es " + miNombre + " " + miApellido + "."
+                // console.log(miSaludo);
+
+            /* INTERPOLACIÓN DE VARIABLES */
+                /* TEMPLATE STRING */
+                let miSaludo2 = `Hola, mi 
+                                nombre es ${miNombre} ${miApellido}.`
+                // console.log(miSaludo2);
+        </script>
+
+        <script>
+        /* NUMBERS */
+            /*Podemos crear cualquier tipo de numero: */
+            let num1 = 3;               //Numeros enteros
+            let num2 = new Number(20);  //Numeros con Constructor
+            let num3 = 8.141516;        //Numeros decimales
+
+            /* Algunos métodos */
+            num3.toFixed(1) //Para redondear a un decimal -> .toFixed(# de decimales)
+            num3.toFixed(4) //Para redondear a 4 decimales
+            parseInt(num3)     //Para convertir a entero
+            parseFloat(num3)   //Para convertir a flotante (decimal)
+            /*El objeto padre de los números es NUMBER, por lo que también podemos usar algunos métodos así: */
+            Number.parseInt(num3)      //Para convertir a entero
+            Number.parseFloat(num3)    //Para convertir a flotante (decimal)
+
+            /*NOTA: Js es un poco débil al trabajar con números decimales, puede tener errores en los cálculos; por lo 
+                    que es recomendado usar librerías si vamos a usar varios cálculos en nuestra aplicación*/
+        </script>
+
+        <script>
+        /* BOOLEANS */
+            let verdadero = true;
+            let falso = false;
+            let boolean = new Boolean(true); //crear un boolen a partir del constructor
+
+            //  TRHUTY -> Valores que tienden a verdadero
+                Boolean(" ");       //Cadena de texto, aunque sea un espacio en blanco
+                Boolean({});        //Objeto vacío
+                Boolean([])         //Array
+                Boolean(42)         //Numero
+                Boolean(new Date()) //Dato tipo Fecha
+                Boolean(-45)        //Numeros Negativos
+                Boolean(3.14)       //Numeros Decimales
+                Boolean(Infinity)   //Infinito + 
+                Boolean(-Infinity)  //Infinito -
+
+            //  FALSY   -> Valores que tienden a falso 
+                Boolean(false)      //falso
+                Boolean(null)       //nulo
+                Boolean(undefined)  //indefinido
+                Boolean(0)          //Cero
+                Boolean(NaN)        //Not a Number
+                Boolean("")         //Cadena de texto vacia
+                Boolean("")         //Cadena de texto vacia
+                Boolean(document.all) //Nodo no existente (DOM)
+
+            // PARA SABER SI UN VALOR TIENDE A VERDADERO O FALSO, PODEMOS USAR console.log(Boolean(#Valor));
+
+        </script>
+
+        <script>
+        /* NULL - UNDEFINED - NaN */
+            let nula = null;                //NULL      -> Es una variable vacía, intencionalmente asignado por el programador 
+            let indefinida;                 //UNDEFINED -> Es una variable no inicializada, Js le asigna el valor de UNDEFINED
+            let noEsUnNumero = "Hello" * 4; //NaN       -> Not a Number, cuando hagamos calculos con valores que no son números
+        </script>
+        <!-- TIPOS DE DATOS PRIMITIVOS -->
+
+
+        <!-- TIPOS DE DATOS COMPUESTOS O COMPLEJOS -->
+        <script>
+        /* FUNCIONES */
+            /* Funcion ->  Bloque de codigo autocontenido, es decir, es independiente al Scope y ambito GLOBAL. 
+                            Se pueden asignar como valor, pueden retornar un valor o una ejecución, se pueden 
+                            pasar como argumentos, etc
+            */
+            
+            /*Declarar una función: hay 2 formas, declaradas y expresadas*/
+                //Funcion Declarada -> Puede invocarse en cualquier parte del codigo, incluso antes que sea declarada  
+                    //Invocacion de funcion antes de declararla
+                        funcionDeclarada() //Los parentesis indican que la funcion se va a ejecutar                   
+                
+                    function funcionDeclarada() {
+                        //console.log("Funcion Declarada");
+                    }
+
+                    //Invocacion de funcion despues de declararla
+                        funcionDeclarada() //Los parentesis indican que la funcion se va a ejecutar
+                    
+                    //LO QUE SUCEDE ES QUE JS HACE UN HOISTING DE LAS FUNCIONES, POR LO QUE SE PUEDE INVOCARLAS ANTES DE DECLARARLAS 
+
+                //Funcion expresada -> Usar las funciones como expresiones, es decir, crear la funcion y asignarla dinamicamente a una variable
+                    const funcionExp = function () { //no es necesario el nombre en la funcion, ya que tomara el nombre de la variable (FUNCION ANONIMA)
+                        //console.log("Funcion Expresada");
+                    }
+                    
+                    funcionExp()
+
+                    //SI INVOCAMOS LA FUNCION ANTES DE DECLARAR, NOS DARÁ UN ERROR DE REFERENCIA, ES DECIR, NO SE PUEDE ENCONTRAR DICHA FUNCION
+                
+                //NOTA: EN LOS ULTIMOS AÑOS EL ESTILO DE FUNCION EXPRESADA ESTA SIENDO MAS UTILIZADA, DEBIDO A DIFERENTES LIBRERIAS COMO REACT, VUE Y ANGULAR
+
+            /*Funcion con parametros:*/
+            function saludar(nombre = "Desconocido", edad = 0) { 
+                //Si a la funcion no se le pasa parametros, tomará el valor asignado despues del "="
+                //console.log(`Hola, mi nombre es ${nombre} y tengo ${edad} años.`);
+            }
+
+            saludar("Jhan", 23)
+            saludar()
+        </script>
+
+        <script>
+        /* ARRAYS */
+            const a = [];
+            const b = [1, 2.3, "Hi", ["A", "B", "C"]];
+            //console.log(a);
+            //console.log(b);
+
+            /* Otra forma de crear arrays, accediendo al objeto ARRAY de JS y su constructor */
+            const c = Array.of("X", "Y", "Z") //Array.of -> permite llenar elementos
+            //console.log(c);
+            
+            const d = Array(100).fill(false) //Crea un arreglo de "100" elementos y los llena con "false"
+            //console.log(d); 
+
+            const e = new Array();
+            //console.log(e);
+
+            const f = new Array(1, 2, 3, 4, "Hi", "String", "etc")
+            //console.log(f);
+
+            /* ALGUNOS METODOS DE ARREGLOS */
+            const colores = ["Rojo", "Verde", "Azul"];
+
+            colores.push("Negro"); //Agrega elementos al final del array
+            //console.log(colores);
+
+            colores.pop(); //Elimina el ultimo elemento
+            //console.log(colores);
+
+            colores.forEach(function(elemento, indice) { //la funcion declarada se ejecutara en cada elemento del array, y le podemos pasar 2 parametros (Elemento, Indice)
+                //console.log(`Color: ${elemento} - Indice ${indice}`);
+            })
+        </script>
+
+        <script>
+        /* OBJETOS -> {llave:valor} */
+            //Dentro de un objeto a las variables se les llama ATRIBUTOS
+            //Dentro de un objeto a las funciones se les llama METODOS
+            const objetoA = {} //Objeto vacío
+            const objetoB = new Object(); //Crear objeto con el constructor
+            const jhan = {
+                nombre:"Jhan Marco",
+                apellido: "Torres Edquen",
+                edad:23,
+                pasatiempos:["Escuchar música", "Ver vídeos", "Leer"],
+                soltero:false,
+                contacto:{
+                    email:"jtorrese17_1@unc.edu.pe",
+                    facebook:"Jhan Torres",
+                    instragram:"@jhanmte"
+                },
+                saludar:function() {
+                    console.log("Hello, World");
+                },
+                decirNombre:function() {
+                    console.log(`Hello, i am ${this.nombre} ${this.apellido}, nice to meet you :)`);   
+                }, //"this" hace referencia al objeto en donde nos encontramos.
+            }
+            //console.log(jhan);              //Nota: cuando imprimimos un objeto, el nombre de sus campos se mostrarán en forma alfabetica.
+            //console.log(jhan["nombre"]);    //Podemos acceder a un determinado campo del objeto con "[]", pero no es tan usado.
+            //console.log(jhan.nombre);       //Acceder a los atributos de un objeto con ".", esta es la forma mas usada.
+            //console.log(jhan.pasatiempos[1]);
+            //console.log(jhan.contacto.facebook);
+
+            //Mientras que una variable o atributo de un objeto devuelve un valor, con las funciones necesitan los (), para ejecutarse y si es necesario también paramétros
+            //jhan.saludar();               
+            //jhan.decirNombre();
+
+            /* ALGUNOS METODOS DE OBJETOS */
+            //console.log(Object.keys(jhan));     //Para listar en un arreglo las llaves del objeto "jhan"
+            //console.log(Object.values(jhan));   //Para listar en un arreglo los valores del objeto "jhan"
+            //console.log(jhan.hasOwnProperty("nombre")); //True o False si es que se tiene una llave determinada en un objeto
+
+            //ELIMINAR UNA PROPIEDAD DE UN OBJETO:
+            //delete jhan.apellido
+        </script>
+        <!-- TIPOS DE DATOS COMPUESTOS O COMPLEJOS -->
+
+
+        <!-- TIPOS DE OPERADORES -->
+        <script>    
+        /* OPERADORES ARITMETICOS */
+            let operaciones = 25 + 5 - 3 * 10 + (10/2);
+            let modulo = 5%2; // % -> nos da el resto de una división
+
+            //console.log(operaciones);
+            //console.log(modulo);
+
+        /* OPERADOES RELACIONALES (<, >, <=, >=, ==, ===, !=, !==) */
+            //console.log(4 < 5); //Imprimirá TRUE
+            //console.log(4 < 4); //FALSE
+            //console.log(4 <= 4); //TRUE
+
+            // "="      -> Es asignacion de una variable
+            // "=="     -> Es comparacion de valores, ya se considera mala práctica
+            // "==="    -> Es comparacion de tipo de dato y valor, se recomienda usar por buena práctica
+
+            //console.log(7 == 7);    //TRUE
+            // console.log(7 == "7");  //TRUE, debido a que "7" tiende a VERDADERO
+            // console.log(0 == false);//TRUE, debido a que 0 tienede a FALSO
+
+            // console.log(7 === 7);   //TRUE, debido a que el tipo de dato y valor son iguales
+            // console.log(7 === "7"); //FALSE, debido a que uno es un numero y el otro es una cadena
+            // console.log(0 === false);//FALSE, debidoa que uno es un numero y el otro es un booleano
+
+        /* OPERADORES INCREMENTO Y DECREMENTO */
+            let i = 0;
+            i += 1; //(i = i + 1;) (i = i - 1;) (i = i * 1;) (i = i / 1;)
+            //console.log(i); // Imprime 1
+
+        /* OPERADOR UNARIO */
+            i++; // (i += 1) o (i = i + 1), y tambien se puede hacer con la resta -> i--
+            //console.log(i); //Imprime 2
+            
+            ++i; //Tener cuidado acá, parece lo mismo que i++, pero son diferentes, en las siguientes lineas se explica
+            //console.log(i); //Imprime 3
+
+            let o = 0
+            //console.log(o++);   //Imprime 0, debido a que primero imprime el valor de "o" (0) y luego aumenta el valor de o en 1
+            //console.log(o);     //Imprime 1, debido a que ahora "o" ya vale 1.
+
+            let u = 0
+            //console.log(++u);   //Imprime 1, debido a que primero aumenta el valor de "u" (1) y luego imprime el valor
+            //console.log(u);     //Imprime 1, debido a que el valor de "u" ya es 1
+        
+        /* OPERADORES LOGICOS */
+            //NEGACION (Not) -> !
+                //console.log(true);      //Imprime True
+                //console.log(!true);     //Imprime False
+            //OR (O) -> ||  -> Cuando hay 2 o mas condiciones y cuando 1 sea verdadera OR nos dara true 
+                //console.log((9 === 9) || (9 == "9")); //Imprime true, porque la primera condicion es verdadera 
+                //console.log((9 === "9") || (7 === "7"));//Imprime false, porque ambas son falsas
+            //AND (Y) -> && -> Cuando hay 2 o mas condiciones y todas deben ser verdaderas para que sea verdadero
+                //console.log((9 === 9) && (9 === "9")); //Imprime false, dado que la segunda condicion es falso
+                //console.log((9 === 9) && (7 === 7));//Imprime true, dado que ambas son verdaderas
+        </script>
+        <!-- TIPOS DE OPERADORES -->
+
+        <!-- ESTRUCTURAS DE CONTROL -->
+        <script>
+        //ESTRUCTURAS CONDICIONALES
+            //IF-ELSE
+            // let edad = 17
+            // if (edad >= 18) {
+            //     console.log("Mayor de edad");
+            // }
+            // else {
+            //     console.log("Menor de edad");
+            // }
+            
+            //IF - ELSE IF - ELSE (if anidados)
+            let hora = 15;
+            if (hora >= 5 && hora <= 12) {
+                // console.log("Wenos días");
+            }
+            else if (hora > 12 && hora <= 18) {
+                // console.log("Wenas tardes");
+            }
+            else if (hora > 18 && hora <= 24) {
+                // console.log("Wenas noches");
+            } 
+            else {
+                // console.log("Mimiendo");
+            }
+
+            //OPERADOR TERNARIO -> (condicion) ? verdadero:falso
+            let edad = 17;
+            let m = (edad < 18) ? "Menor de edad":"Mayor de edad";
+            //console.log(m);
+
+            //SWITCH-CASE (diferentes valores para una misma variable)
+            let dia = 2;
+            switch (dia) {
+                case 1:
+                    // console.log("Lunes");
+                    break;
+                case 2:
+                    // console.log("Martes");
+                    break;
+                default: //si la variable en cuestion no cae en ningun case, entonces se ejecuta el DEFAULT
+                    // console.log("NN");
+                    break;
+            }
+        
+        //CICLOS (LOOPS)
+            //WHILE -> La condición se tiene que cumplir antes de que se emepiece a ejecutar las líneas dentro del bucle.
+            let contador = 0;
+
+            // while (contador < 10) {
+            //     // console.log("WHILE: " + contador++);
+            // }
+            
+            //DO-WHILE -> Se ejecutará una vez las líneas del DO y luego se evaluará la condición.
+            // do {
+            //     // console.log("DO WHILE: " + contador++)
+            // } while (contador < 10);
+
+            //FOR (inicialización de la variable; condición; decremento o incremento)
+            for (let index = 0; index < 10; index++){
+                //console.log(index);
+            }
+
+            //FOR-IN -> Permite recorrero o iterar las propiedades de un objeto.
+            const objPersona = {
+                "nombre":"Jhan",
+                "apellidos":"Torres"
+            }
+            for (const key in objPersona) {
+                // console.log("key: " + key + " - " + " value: " + objPersona[key]); 
+            } //Para acceder al valor de una llave, tenemos que usar [], la notacion con "." no sirve en este tipo de bucle
+
+            //FOR-OF -> Permite recorrer todos los elementos de cualquier objeto que sea iterable en Js (ej: arrays y cadenas de texto)
+            const arrayA = [1, 2, 3, 4]
+            for (const iterator of arrayA) {
+                // console.log(iterator);
+            }
+        </script>
+        <!-- ESTRUCTURAS DE CONTROL -->
+
+
+        <!-- MANEJO DE ERRORES -->
+        <script>
+            try {//En el try, cuando detecta un error sale del TRY y se ejecuta lo que esta en el CATCH
+                // console.log("try, va el codigo que se va a evaluar");
+            } catch (error) {
+                // console.log("catch, captura cualquier error surgido o lanzado en el try");
+                // console.log(error);//para mostrar el error que se tiene
+            } finally { //Opcional
+                // console.log("finally, siempre se va a ejecutar este bloque al final, haya error o no");
+            }
+
+            try {
+                let numeroD = "y";
+
+                if (isNaN(numeroD)) {
+                    throw new Error("La variable no es un número"); //Generamos un error personalizado
+                }
+
+                console.log(numeroD + 4);
+            } catch (error) {
+                //console.log("Exite un error: " + error);
+            }
+        </script>
+        <!-- MANEJO DE ERRORES -->
+
+
+        <!-- "BREAK" Y "CONTINUE" -->
+        <script>
+            //BREAK     -> Para salir de la estructura de control en la que está  
+            const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+            for(let i = 0; i < numbers.length; i++){
+                if (i === 3) {
+                    break;
+                }
+                // console.log(numbers[i]); //[0, 1, 2, 4, 5, 6, 7, 8, 9]
+            }
+
+            //CONTINUE  -> Omitir el codigo que se encuentra en esa iteración
+            for(let i = 0; i < numbers.length; i++){
+                if (i === 3) {
+                    continue;
+                }
+                // console.log(numbers[i]);    //[0, 1, 2, 4, 5, 6, 7, 8, 9]
+            }
+        </script>
+        <!-- "BREAK" Y "CONTINUE" -->
+
+
+        <!-- DESTRUCTURACIÓN (destruturing) -->
+        <script>
+            //Es una nueva forma de asignar valores, sobre todo a arreglos y objetos.
+            const arr = [0, 1, 2, 3]
+            //Arrays -- Sin destructuring
+                let one = arr[0], two = arr[1], three = arr[2], four = arr[3];
+                //console.log(one, two, three, four);
+                
+            //Arrays -- Con destructuring
+                let [one1, two2, three3, four4] = arr; //(Importa el orden)
+                //console.log(one1, two2, three3, four4);
+            
+            //Objetos
+            const persona = {
+                name:"Jhan",
+                lastName:"Torres",
+                age:23
+            }
+
+            const {age, lastName, name} = persona; //La variable tiene que llamarse igual que la propiedad del objeto, sino será UNDEFINED
+            //console.log(name, lastName, age);
+        </script>
+        <!-- DESTRUCTURACIÓN (destruturing) -->
+
+
+        <!-- OBJETOS LITERALES -->
+        <script>
+            //Se denomina objeto literal al objeto cuyas propiedades están declaradas textualmente en el código.
+            //Una nueva forma de escribir atributos y metodos, ademas de asignarlos
+            //ANTIGUAMENTE
+            let nombrePerro = "Chuck", edadPerro = 7;
+            const perro = {
+                nombre: nombrePerro,
+                edad: edadPerro,
+                ladrar : function() {
+                    console.log("Woof...Woof...");
+                }
+            }
+            // console.log(perro);
+            // perro.ladrar();
+            
+            //OTRA FORMA DE CREAR OBJETOS ATIGUAMENTE ES:
+            let objetoPerro = new Object("Nombre:Perro1")
+
+            //CON OBJETOS LITERALES
+            function darPata () {
+                console.log("Patita");
+            }
+
+            const dog = {
+                nombrePerro,
+                edadPerro,
+                ladrar() {
+                    console.log("Woof...Woof...Woof");
+                },
+                darPata
+            }
+            // console.log(dog);
+            // dog.ladrar();
+            // dog.darPata();
+        </script>
+        <!-- OBJETOS LITERALES -->
+
+
+        <!-- PARAMETROS REST Y SPREAD OPERATOR -->
+        <script>
+            //PARAMETROS REST -- Se emplea en parametros que recibe una funcion
+            function suma(a, b, ...c) {//...c crea un arreglo de todos los parametros que se enviarán despues del a y b
+                let resultado = a + b;
+                c.forEach( function(number) {
+                    resultado += number;
+                } );
+                return resultado;
+            }
+            // console.log(suma(2, 3, 4, 4));
+
+            //SPREAD OPERATOR - OPERADOR DE PROPAGACION - Se puede emplear en cualquier sentencia de nuestro codigo
+            const array1 = [1, 2, 3, 4, 5], array2 = [6, 7, 8, 9, 10];
+            const array3 = [...array1, ...array2] 
+            //console.log(array3);//[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        </script>
+        <!-- PARAMETROS REST Y SPREAD OPERATOR -->
+
+
+        <!-- ARROW FUNCTIONS -->
+        <script>
+            //Son una nueva forma de definir funciones anonimas expresadas.
+            //FUNCION EXPRESADA:
+            const sayHello = function() {
+                console.log("Hello!");
+            } 
+            // sayHello();
+
+            //ARROW FUNCTION:
+            const sayBye = () => {
+                console.log("Bye!"); //Si funcion solo tiene una linea de codigo, se pueden omitir las llaves y dejar en una sola linea {}
+            }                           //(params) => console.log("Bye!");
+            // sayBye();
+
+            //ARROW FUNCTION CON PARAMETROS
+            const sayMyName = name => console.log("Hello, " + name);//Si hay un solo parametro, se puede omitir los parentesis ()
+            // sayMyName("Jhan");
+
+            //OTRO EJEMPLO
+            const sumando = (a, b) => a + b; //tambien se omite el return, en este caso retorna (a + b)
+            //console.log(sumando(4, 4));
+
+            //ARROW FUNCTIONS EN OBJETOS: 
+            const serHumano = {
+                nombre: "Jhan",
+                edad: 23,
+                sayA() {//Funcion normal
+                    console.log(this);//Hace referencia al objeto actual (serHumano)
+                },
+                sayB: () => {//Arrow funcion
+                    console.log(this);//Hace referencia al objeto WINDOW, tener cuidado al usar AF en metodos de objetos porque ignora el contexto del objeto
+                }
+            }
+
+            // serHumano.sayA();
+            // serHumano.sayB();
+        </script>
+        <!-- ARROW FUNCTIONS -->
+
+
+        <!-- PROTOTIPOS -->
+        <script>
+            /*  Los prototipos son un conjunto de normas para integrar Programación Orientada a Objetos en JavaScript. 
+            Son un mecanismo mediante el cual los objetos en JavaScript heredan características entre sí.  */
+            
+            //NOTA: Object.prototype es el prototipo raíz -> (*)
+
+            /*Cuando una función es creada en Js, el motor de Js agrega una propiedad (prototype). Esta propiedad es un
+            objeto(*) que contiene un constructor por default. Para acceder al prototype de una funcion: console.log(funcion.prototype)/*
+
+            /*JavaScript es a menudo descrito como un lenguaje basado en prototipos, para proporcionar mecanismos de herencia, 
+            los objetos pueden tener un objeto prototipo(*), el cual actúa como un objeto plantilla que hereda métodos y propiedades.*/
+            
+            /*Un objeto prototipo del objeto puede tener a su vez otro objeto prototipo, el cual hereda métodos y propiedades, 
+            y así sucesivamente. Esto es conocido con frecuencia como la cadena de prototipos, y explica por qué objetos diferentes 
+            pueden tener disponibles propiedades y métodos definidos en otros objetos.*/
+
+            /*La cadena de prototipos siempre se recorre cuando queremos leer una propiedad o ejecutar un metodo, no cuando queremos
+            realizar una asignación*/
+
+            /* __proto__  -> en Js se lo conoce como dunder proto, apunta directamente al prototipo del objeto */
+
+            /*
+            function Home(name, address) {
+                this.name = name,
+                this.address = address,
+                this.sayAddress = function() {
+                    console.log(this.address);
+                }
+            }
+
+            let myHome = new Home("Casa 1", "Av. St")
+
+            console.log(Home.prototype);                                //  {constructor: ƒ}
+            console.log(Home.__proto__);                                //  ƒ () { [native code] }
+            console.log(myHome);                                        //  Home {name: 'Casa 1', address: 'Av. St'}
+            console.log(myHome.__proto__);                              //  {constructor: ƒ}
+            console.log(myHome.__proto__ === Home.prototype);           //  true
+            console.log(Home.prototype === Home.__proto__);             //  false
+            console.log(Home.prototype.__proto__);                      //  {constructor: ƒ, __defineGetter__: ƒ, __defineSetter__: ƒ, hasOwnProperty: ƒ, __lookupGetter__: ƒ, …}
+            console.log(myHome.sayAddress.__proto__ === Home.__proto__);//  true
+            
+            const ARRAY1 = [1, 2, 3, 4];
+            const ARRAY2 = [5, 6, 7, 8];
+
+            ARRAY1.__proto__.saySomething = function() {
+                console.log("I AM AN ARRAY");
+            }
+
+            console.log(ARRAY1);
+            console.log(ARRAY2);
+            console.log(ARRAY2.saySomething === ARRAY1.saySomething);   //  true
+            console.log(ARRAY1.__proto__ === ARRAY2.__proto__);         //  true
+
+            const OBJETO1 = {"nombre":"Jhan"}
+            const OBJETO2 = {"nombre":"Anna"}
+
+            console.log(OBJETO1.__proto__ === ARRAY1.__proto__.__proto__); //true
+            */
+        </script>
+        <!-- PROTOTIPOS -->
+
+
+        <!-- CLASES Y HERENCIA -->
+        <script>
+            class Person{                           //Las clases no reciben parametros.
+                constructor(name, genre) {          //El constructor es el que recibe y usa los parametros. Se ejecuta con la palabra "new"
+                    this.name = name,
+                    this.genre = genre
+                }     
+
+                //Al usar metodos dentro de las CLASES, el motor de JS los aplicará directamente al prototipo, para ahorrar recursos.
+                sayName() {
+                    console.log(`My name is ${this.name}`); 
+                }
+
+                sayGenre() {
+                    console.log(`I am ${this.genre}`);
+                }
+            }
+
+            const person1 = new Person("Jhan", "Male")
+            const person2 = new Person("Anna", "Female")
+
+            // console.log(person1);
+            // person1.sayName();
+            // console.log(person2);
+            // person2.sayGenre();
+
+            class Cheff extends Person{ //HERENCIA -> EXTENDS
+                constructor(name, genre, plato) {
+                    super(name, genre); //Con este metodo "super()" llamamos al constructor de la clase padre (Person)
+                    this.plato = plato
+                }
+
+                sayPlato() {
+                    console.log(`I am cooking ${this.plato}`);
+                }
+            }
+
+            const cheff1 = new Cheff("Chefcito", "Rat", "Omuraice")
+
+            // console.log(cheff1);
+            // cheff1.sayPlato();
+        </script>
+        <!-- CLASES Y HERENCIA -->
+
+
+        <!-- METODOS ESTATICOS, GETTERS Y SETTERS -->
+        <script>
+            class Perro {
+                constructor(nombre, raza) {
+                    this.nombre = nombre,
+                    this.raza = raza,
+                    this.edad = null
+                }
+
+                //Metodo estatico se puede ejecutar sin crear un objeto (instancia de una clase)
+                static saySomething() { 
+                    console.log(`Hola soy un Perro`);
+                }
+
+                //GETTERS Y SETTERS son metodos que permiten obtener y establecer los atributos de una clase respectivamente
+                get getRaza() {
+                    return this.raza
+                }
+
+                set setEdad(edad) {
+                    this.edad = edad
+                }
+            }
+
+            // Perro.saySomething(); //metodo static, siendo invocado sin un objeto instanciado de la clase
+
+            const perro1 = new Perro("Goofy", "Golden Retriever");
+
+            // console.log(perro1.getRaza); //metodo GET, pero se usa como si fuera atributo, es decir sin los parentesis "()" 
+            perro1.setEdad = 10; //Metodo SET, para cambiar la edad del perro.
+
+            // console.log(perro1);
+        </script>
+        <!-- METODOS ESTATICOS, GETTERS Y SETTERS -->
+        
+
+        <!-- OBJETO CONSOLE -->
+        <script>
+            console.log(console);
+            console.log("Para Registros");
+            console.error("Para Errores");
+            console.warn("Para Advertencias");
+            console.info("Para Información");
+
+            //PLACEHOLDERS
+            let name1 = "Jhan", apellido1 = "Torres", edad1 = 23;
+            console.log("Mi nombre es %s %s y tengo %d años", name1, apellido1, edad1); //% para strings,  %d para digitos
+
+
+            //WINDOW Y DOCUMENT
+            console.log(window);    //Mostrará el objeto window
+            console.log(document);  //Mostrará el archivo HTML en donde estamos trabajando
+
+            //usamos el .DIR para representar como objeto. 
+            console.dir(window);    //Mostrará el objeto window
+            console.dir(document);  //Mostrará el objeto document, con todos sus propiedades y metodos
+
+            //GRUPOS EN EL CONSOLE
+            console.group("1")  //console.groupCollapse muestra el icono para desplegar
+            console.log("1.1"); 
+            console.log("1.2");
+            console.log("1.3");
+            console.groupEnd(); //Para cerrar el grupo
+
+            //TABLAS EN EL CONSOLE
+            console.log(console);   
+            console.table(Object.entries(console)); //Para generar una fila por cada una de las propiedades que tiene el objeto console
+
+            //REPRESENTAR ARREGLOS Y OBJETOS EN FORMA DE TABLA
+            const vocales = ["a", "e", "i", "o", "u"];
+            const animal = {
+                raza: "Perro",
+                edad: 5
+            }
+
+            console.table(vocales);
+            console.table(animal);
+
+            //MEDIR EL TIEMPO DE RESPUESTA
+            console.time("Tiempo de respuesta"); //lo que va dentro de los "()" es la etiqueta con la que se reconocerá el proceso 
+            const arregloPrueba = Array(1000);
+            
+            arregloPrueba.fill("a");
+            console.timeEnd("Tiempo de respuesta") //aqui tiene que ser la misma etiqueta, para que no haya error
+
+            //SABER CUANTAS VECES SE EJECUTA UN BLOQUE DE CODIGO
+            for (let index = 0; index < 10; index++) {
+                console.count("codigo for: ");
+                console.log(index);
+            }
+
+            //PARA REALIZAR ALGUNOS TEST
+            let x = 1;
+            let y = 2;
+            let mensaje = "Se espera que X siempre sea menor que Y"
+
+            console.assert(x < y, (x, y, mensaje)); //Si se cumple la condicion "(x < y)" no habrá error, sino mostrará el mensaje
+
+            //LIMPIAR LA CONSOLA
+            console.clear();
+        </script>
+        <!-- OBJETO CONSOLE -->
+
+        <!-- OBJETO DATE -->
+        <script>
+            console.log(Date());            //Devuelve la fecha y hora actual
+            
+            let fecha = new Date();
+            console.log(fecha);                 //Devuelve la fecha y hora actual
+            console.log(fecha.getDate());       //Devuelve el N° del día del mesa
+            console.log(fecha.getDay());        //Devuelve el N° del día de la semana (D L M M J V S) -> 0 1 2 3 4 5 6
+            console.log(fecha.getMonth());      //Devuelve el N° del mes del año, empieza en Enero con posicion 0
+            console.log(fecha.getYear());       //Devuelve el N° del año desde el año 1900 (2023 -> 123)
+            console.log(fecha.getFullYear());   //Devuelve el N° del año
+            console.log(fecha.getHours());      //Devuelve las horas (formato 0 -> 23)
+            console.log(fecha.getMinutes());    //Devuelve los minutos 
+            console.log(fecha.getSeconds());    //Devuelve los segundos
+            console.log(fecha.toString());      //Devuelve la fecha completamente
+            console.log(fecha.toDateString());  //Devuelve el dia mes °dia año
+            console.log(fecha.toLocaleString());//Devuelve dia/mes/año y la hora
+
+            //NOTA, SI QUEREMOS TRABAJAR CON TIEMPO EN NUESTRAS APLICACIONES, TENEMOS LA LIBRERIA "MOMENT.JS"
+            console.clear();
+        </script>
+        <!-- OBJETO DATE -->
+
+
+        <!-- OBJETO MATH -->
+        <script>
+            //Math es un objeto estatico, es decir lo tenemos que ejecutar lo tenemos que invocar con su prototipo
+            console.log(Math);
+            console.log(Math.PI);           //PI
+            console.log(Math.abs(-5));      //Valor absoluto -> 5
+            console.log(Math.ceil(7.2));    //Redondea al numero entero mayor -> 8
+            console.log(Math.floor(7.2));   //Redondea al numero entero menor -> 7 
+            console.log(Math.round(7.2));   //Redondea al numero entero más cercano -> 7
+            console.log(Math.sqrt(81));     //Raiz cuadrada -> 9
+            console.log(Math.pow(2, 3));    //Elevar, .pow(base, potencia) -> 8
+            console.log(Math.sign(-8));     //Indicar si es positivo, negativo o cero. Devuelve 1, -1 o 0 respectivamente
+            console.log(Math.random());     //Numero aleatorio entre 0 y 1
+
+            console.clear();
+        </script>
+        <!-- OBJETO MATH -->
+
+
+        <!-- OPERADORES DE CORTOCIRCUITO -->
+        <script>
+            /* CORTOCIRCUITO OR: Cuando el valor de la izquierda en la expresión siempre pueda validar a true, es el 
+            valor que se cargará por defecto */
+            console.log("Hola" || "Valor derecho");     //Primer valor al ser verdadero, se mostrará "Hola"
+            console.log(null || "Valor derecho");       //Primer valor al ser falso, se mostrará "Valor derecho"
+
+            /* CORTOCIRCUITO AND: Cuando el valor de la izquierda en la expresión siempre pueda validar a false, es el
+            valor que se cargará por defecto */
+            console.log("Hola" && "Valor derecho");     //Primer valor al ser verdadero, muestra el valor de la derecha "valor derecho"
+            console.log(null && "Valor derecho");       //Primer valor al ser falso, muestra ese valor "null" 
+
+            console.clear();
+
+        </script>
+        <!-- OPERADORES DE CORTOCIRCUITO -->
+
+
+        <!-- ALERT, CONFIRM Y PROMPT -->
+        <script>
+            // alert("Alerta");            //Alerta del navegador
+            // confirm("Confirmación");    //Aviso con opciones "Aceptar" y "Cancelar" 
+            // prompt("Prompt");           //Aviso con un espacio para colocar datos
+
+            //Si al confirm lo almacenamos en una variable, esta tomará true o false según hagamos click en "Aceptar" o "Cancelar"
+            // let confirmacion = confirm("CONFIRMACIÓN");
+            // console.log(confirmacion);
+
+            /*Si al prompt lo almacenamos en una variable, esta tomará el valor de lo que ingresemos (cadena), siempre y cuando
+            le dejmos "Aceptar". Si ingresamos un valor y le damos en "Cancelar", el valor de la variable será NULL */
+            // let aviso = prompt("PROMTP");
+            // console.log(aviso);
+        </script>
+        <!-- ALERT, CONFIRM Y PROMPT -->
+
+
+        <!-- EXPRESIONES REGULARES -->
+        <script>
+            /* Son una secuencia de caracteres que forma un patron de busqueda, principalmente utilizada para la busqueda
+            de patrones de cadenas de caracteres */
+            
+            let cadena = "lorem ipsum dolor sit amet consectetur, lorem";
+            
+            //  1er parametro es el patron que se quiere buscar, 2do parametro son los comodines o banderas  
+            let expReg = new RegExp("lorem", "g"); //con "g" decimos que encuentre todas las concidencias, sino solo encontrará 1 conincidencia
+            //con la bandera "i" podemos decir que ignore las mayusculas y minusculas
+
+            // console.log(expReg.test(cadena)); //TRUE O FALSE si es que la REG EXP existe dentro de la cadena
+            // console.log(expReg.exec(cadena)); //Ejecuta una busqueda en las coincidencias de la REG EXP en la cadena, devuelve un ARRAY
+        </script>
+        <!-- EXPRESIONES REGULARES -->
+
+
+        <!-- FUNCIONES ANONIMAS AUTOEJECUTABLES - INMMEDIATELY INVOKED FUNCTION EXPRESSION - IIFE -->
+        <script>
+            /*Es una funcion en la cual se engloba todo el codigo que se quiere ejecutar, en el momento en el que el archivo carga 
+            en el navegador se ejecuta el codigo de esa funcion. Ademas esta protegido de efectos secundarios que puede tener la 
+            invocacion de librerias de terceros o de otros mismos archivos que tengamos. Permite tambien pasar parametros de una 
+            manera mas amigable*/
+
+            //FORMAS DE CREAR IFFE´S
+            //CLASICA
+            (function(p1, p2) {
+                    console.log("Inside CLASSIC IIFE " + p1 + " " + p2);
+            })("param1", "param2");
+
+            //FORMATO CROCKFORD (libro - javascript the good parts - Douglas Crockford)
+            ((function(p1, p2) {
+                console.log("Inside CROCKFORD IIFE " + p1 + " " + p2);
+            })("param1", "param2"));
+
+            //UNARIA
+            +function(p1, p2) {
+                console.log("Inside UNARY IIFE " + p1 + " " + p2);
+            }("param1", "param2");
+
+            //Facebook
+            !function(p1, p2) {
+                console.log("Inside FACEBOOK IIFE " + p1 + " " + p2);
+            }("param1", "param2");
+        </script>
+        <!-- FUNCIONES ANONIMAS AUTOEJECUTABLES - INMMEDIATELY INVOKED FUNCTION EXPRESSION - IIFE -->
+    </body>
+</html>

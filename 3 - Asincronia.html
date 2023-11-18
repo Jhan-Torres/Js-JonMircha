@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Document</title>
+</head>
+
+<body>
+	<script>
+		setTimeout(() => {
+			console.log("SetTimeout, despues de 3s");
+		}, 3000);
+		//setTimeout -> ejecuta el codigo que tiene adentro, despues de pasada el tiempo indicado en milisegundos
+		//clearTimeout(variable) -> "variable" puede almacenar el setTimeout y lo que hace el clear es limpiar ese setTimeout
+
+		setInterval(() => {
+			// console.log("SetInterval, cada 1s");
+			console.log(new Date().toLocaleTimeString());
+		}, 1000);
+		//setInterval -> ejecuta el codigo que tiene adentro, cada tiempo indicado en milisegundos
+		//clearInterval(variable) -> "variable" puede almacenar el setInterval y lo que hace el clear es limpiar ese setInterval
+
+		/*
+		SINGLE THREAD(un solo hilo) Y MULTI THREAD(varios hilos):
+		los hilos (thread) son las unidades básicas de ejecución de cada proceso que realiza nuestra máquina. JavaScript trabaja
+		con un solo hilo de ejecución.
+
+		OPERACIONES DE CPU y OPERACIONES DE I/O:
+		Las operaciones de CPU son aquellas que pasan el mayor tiempo consumiendo los procesos de nuestra CPU.
+		Las operaciones de Etrada(Input) - Salida(OutPut) son aquellas que ocupan la mayor parte del tiempo esperando la peticion
+		del recurso que han solicitado.
+		
+		OPERACIONES CONCURRENTES Y PARALELAS:
+		Operaciones concurrentes, cuando 2 o mas tareas progresan simultaneamente, es decir, se ejecutan al mismo tiempo, pero puede
+		que no hayan empezado al mismo tiempo.
+		Operaciones paralelas, cuando 2 o mas tareas se ejecutan al mismo tiempo. (mismo tiempo de inicio)
+		
+		OPERACIONES BLOQUEANTES Y NO BLOQUEANTES:
+		Siempre va a haber una fase de espera siempre que se va a ejecutar una operacion de nuestro codigo. Si una operacion es 
+		BLOQUEANTE O NO BLOQUEANTE, se va a referir a como toma esa fase de espera:
+		Operacion bloqueante es aquella que no va a devolver el control a la aplicacion hasta que haya terminado toda su tarea.
+		Operacion no bloqueante, estas operaciones se ejecutan y devuelven inmediatamente el control de la aplicacion, sin importar 
+		si hayan acabado con su tarea.
+
+		OPERACIONES SINCRONAS Y ASINCRONAS
+		Estas operaciones se refieren a cuando tendrá lugar la respuesta:
+		Operacion sincrona: La operacion se ejecuta y su respuesta es inmediata, es decir su respuesta sucede en el presente.
+		Operacion asincrona: La operacion se ejecuta y su respuesta se espera en un futuro, no se sabe cuando va a llegar la respuesta.
+		
+		
+		Javascript usa un modelo asincrono y no bloqueante con un loop de eventos implementado en un solo hilo (single thread) para
+		operaciones de entrada y salida(input/output). 
+		*/
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //Otra forma de trabajar con asincronismo en JS, pero Async Await no reemplaza a las promesas, de hecho trabajan en conjunto
+
+    let cuadrado = (value) => {
+      return new Promise((resolve, reject) => {
+        if (typeof value !== "number") {
+          return reject(new Error("Valor no numérico"));
+        }
+
+        setTimeout(() => {
+          resolve({
+            value,
+            result: value * value
+          });
+        }, 1000)
+      })
+    }
+
+    let cuadradoAsync = async () => {
+      try {
+        console.log("Inicio de Async");
+
+        let obj = await cuadrado(1);
+        console.log(`${obj.value} al cuadrado = ${obj.result}`);
+
+        obj = await cuadrado(2);
+        console.log(`${obj.value} al cuadrado = ${obj.result}`);
+
+        obj = await cuadrado(3);
+        console.log(`${obj.value} al cuadrado = ${obj.result}`);
+
+        obj = await cuadrado("4");
+        console.log(`${obj.value} al cuadrado = ${obj.result}`);
+
+        obj = await cuadrado(5);
+        console.log(`${obj.value} al cuadrado = ${obj.result}`);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    cuadradoAsync();
+  </script>
+</body>
+
+</html>

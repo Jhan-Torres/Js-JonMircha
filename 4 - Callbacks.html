@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /* 
+    CALLBACKS:
+    Es una funcion que se ejecuta despues de que otra lo haga. Es el primer mecanismo para tratar con asincrinismo en JS
+    */
+
+    let cuadrado = (value, callback) => {
+      setTimeout(() => {
+        callback(value, value * value)
+      }, 1000);
+    }
+
+    cuadrado(1, (value, result) => {
+      console.log(`${value} al cuadrado = ${result}`);
+      cuadrado(2, (value, result) => {
+        console.log(`${value} al cuadrado = ${result}`);
+        cuadrado(3, (value, result) => {
+          console.log(`${value} al cuadrado = ${result}`);
+        });
+      });
+    });
+
+
+    //EJERCICIO 1
+    function printArray(array, evaluar) {
+      let newArray = [];
+      for (let index = 0; index < array.length; index++) {
+        if (evaluar(array[index])) {
+          newArray.push(array[index]);
+        }
+      }
+      return newArray;
+    }
+
+    //convencion 
+    console.log(printArray([12, "asd", 2, "30", "31"],
+      (num) => { return num % 2 == 0; })); //multiplos de 2
+
+    console.log(printArray([12, "asd", 2, "30", "31"],
+      (num) => { return num % 3 == 0; })); //multiplos de 3
+
+
+    //EJERCICIO 2
+    function transformArray(array, condicion) {
+      let newArray = [];
+      for (let index = 0; index < array.length; index++) {
+        newArray.push(condicion(array[index]));
+      }
+      return newArray;
+    }
+
+    console.log(transformArray([1, 2, 3],
+      (valorArray) => { return valorArray * 5; }));
+    console.log(transformArray([1, 2, 3],
+      (valorArray) => { return `h1 ${valorArray}`; }));
+
+
+    //EJERCICIO 3
+    let users = [
+      { name: "Jhon", age: 23, city: "Cajamarca" },
+      { name: "Juan", age: 24, city: "Cajamarca" },
+      { name: "Juan", age: 25, city: "Cajamarca" },
+    ];
+
+    function filterAge(lista, cb) {
+      let edadesFiltro = [];
+      for (let index = 0; index < lista.length; index++) {
+        edadesFiltro.push(cb(lista[index].age));
+      }
+      return edadesFiltro;
+    }
+
+    const l = filterAge(users, (age) => { return age >= 20 });
+
+    console.log(l);
+
+  </script>
+</body>
+
+</html>

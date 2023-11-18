@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // Estos nuevos tipos de datos vienen desde 2015 con ECMASCRIPT6.
+
+    /*
+    ----------------------------------------------------------------------------------------------------------------
+    SYMBOL:
+    - Tipo de dato primitivo(como: String, Number, Boolean, etc).
+    - Su valor se mantiene privado y para uso interno.
+    - Generalmente se usan para agregar caracteristicas o propiedades de objetos.
+    - Permiten crear identificadores unicos, de referencia.
+    */
+    let id1 = Symbol(); //No se crea mediante "NEW", debido a que no es un constructor
+    let id2 = Symbol(); //Acepta como parametro un numero o cadena de texto, es una etiqueta para identificar el tipo de symbol
+    console.log(id1 === id2); //Al ser tipos "Symbol", tienen identificadores diferentes por lo que no son iguales
+
+    const NOMBRE = Symbol("Nombre");
+
+    const persona = {
+      [NOMBRE]: "Jhan" //[] para tipos de datos "Symbol"
+    }
+
+    console.log(persona); //{Symbol(): "Jhan"}  -> Muestra el tipo de dato(Symbol), mas no el nombre de la propiedad [NOMBRE]  
+
+    persona.NOMBRE = "Jhan Marco";  //crea otra propiedad en el objeto persona llamada "NOMBRE";
+    persona[NOMBRE] = "Jhan Marco"; //actualiza el valor del Symbol, pero el nombre de la propiedad sigue siendo "Symbol()"
+
+    console.log(persona); //{NOMBRE: "Jhan Marco", Symbol(): "Jhan Marco"}
+
+    const SALUDAR = Symbol("Saludar");
+
+    persona[SALUDAR] = () => {
+      console.log("Hello!");
+    }
+
+    console.log(persona);
+    console.log(persona.SALUDAR); //en este caso para invocar una funcion "Symbol", tenemos que hacerlo con []
+    persona[SALUDAR]();
+
+    //Recorriendo el objeto "persona", solo mostrará la propiedad "NOMBRE" y su valor "Jhan Marco", los symbol no lo muestra
+    console.log(persona);
+    for (const key in persona) {
+      console.log(`${key}:${persona[key]}`); //OutPut: NOMBRE:Jhan Marco
+    }
+
+    //Para poder listar las propiedades tenemos un metodo "Object.getOwnPropertySymbols(#objeto)" :
+    console.log(Object.getOwnPropertySymbols(persona));
+
+    console.clear();
+
+
+    /*
+    ----------------------------------------------------------------------------------------------------------------
+    SETS:
+    - Parecido a un arreglo de JS que solo acepta valores únicos, hablando de valores primitivos.
+    */
+
+    /*Propiedades:
+      - .size             -> para la longitud
+      - .add(#valor)      -> para añadir valores, si es valor repetido no se agregará
+      - .delete(#valor)   -> para eliminar algun valor
+      - .has(#valor)      -> para comprobar si tiene algun valor: true o false
+      - .clear()          -> para eliminar todos los valores del set 
+    */
+
+    const set = new Set([2, 3, 4, 4, 5, true, {}, {}, "Hey!"]);
+    console.log(set); //Output: Set(8) {2, 3, 4, 5, true, Object, Object, "Hey!"}  -> notese que no duplica el valor 4
+
+    const arr1 = [2, 2, 3, 3, 4, 4, 5, 5];
+    const setArray1 = new Set([...arr1]); //filtrará los datos repetidos
+    console.log(arr1);
+    console.log(setArray1);
+
+    //para recorrer se puede usar los ciclos de un array normal (for of y forEach)
+    for (const item of setArray1) {
+      console.log(item);
+    }
+
+    console.log(setArray1[0]);  //Undefined
+    //Para acceder a su posicion, tenemos que volver al set a un tipo de dato "iterable" con Array.from  :
+    const arr = Array.from(set)
+    console.log(arr[0]);
+
+    console.clear();
+
+    /*
+    ----------------------------------------------------------------------------------------------------------------
+    MAPS:
+    - Objetos que nos sirven para almacenar un conjunto de valores asociados a manera de objeto, parecido a un objeto primitivo.
+    - Trabajan similarmente con getters y setters como una clase con POO.
+    - Es iterable.
+    */
+
+    let mapa = new Map();
+
+    mapa.set("Nombre", "Jhan Marco"); //.set("propiedad", "valor") -> para agregar propiedad - valor
+    mapa.set("Apellido", "Torres Edquen");
+    mapa.set("Edad", 23);
+
+    console.log(mapa);                //  {'Nombre' => 'Jhan Marco', 'Apellido' => 'Torres Edquen', 'Edad' => 23} -> parecido a un objeto
+    console.log(mapa.size);           //  3   -> para el tamaño del mapa
+    console.log(mapa.has("correo"));  // false -> .has("propiedad") para verificar si tiene esa propiedad 
+    console.log(mapa.get("Edad"));    //23  -> para obtener un valor .get("propiedad")
+    console.log(mapa.set("Edad", 24));// para reemplazar la propiedad indicada
+    mapa.delete("Apellido");    // para eliminar la propiedad indicada
+    console.log(mapa);
+
+    for (let [key, value] of mapa) {
+      console.log(`Clave: ${key} - Valor: ${value}`);
+    }
+
+
+  </script>
+</body>
+
+</html>
