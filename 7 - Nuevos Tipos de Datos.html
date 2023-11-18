@@ -18,6 +18,7 @@
     - Su valor se mantiene privado y para uso interno.
     - Generalmente se usan para agregar caracteristicas o propiedades de objetos.
     - Permiten crear identificadores unicos, de referencia.
+    - Tipo de valor primitivo
     */
     let id1 = Symbol(); //No se crea mediante "NEW", debido a que no es un constructor
     let id2 = Symbol(); //Acepta como parametro un numero o cadena de texto, es una etiqueta para identificar el tipo de symbol
@@ -62,6 +63,7 @@
     ----------------------------------------------------------------------------------------------------------------
     SETS:
     - Parecido a un arreglo de JS que solo acepta valores únicos, hablando de valores primitivos.
+    - Tipo de valor compuesto o complejo
     */
 
     /*Propiedades:
@@ -98,9 +100,13 @@
     - Objetos que nos sirven para almacenar un conjunto de valores asociados a manera de objeto, parecido a un objeto primitivo.
     - Trabajan similarmente con getters y setters como una clase con POO.
     - Es iterable.
+    - Una diferencia de los mapas con los objetos primitivos es que el nombre de la propiedad de los mapas podemos ponder cualquier
+      valor, a diferencia de los objetos primitivos en los cuales solo podemos poner cadenas de texto como nombre de la propiedad. 
+    - Tipo de valor compuesto o complejo.
+    - No hay mucha utilidad para este tipo de datos
     */
 
-    let mapa = new Map();
+    const mapa = new Map();
 
     mapa.set("Nombre", "Jhan Marco"); //.set("propiedad", "valor") -> para agregar propiedad - valor
     mapa.set("Apellido", "Torres Edquen");
@@ -118,7 +124,68 @@
       console.log(`Clave: ${key} - Valor: ${value}`);
     }
 
+    mapa.set(19, "diecinueve"); //Agregando valores primitivos como nombre de propiedad
+    mapa.set(true, "true");  //Agregando valores primitivos como nombre de propiedad
 
+    console.log(mapa);
+
+    //Inicializar un mapa con el constructor:
+    const mapa2 = new Map([
+      ["nombre", "Ana"],
+      ["edad", 21],
+      [null, "nulo"]
+    ])
+
+    mapa2.clear(); //Para limpiar todo el mapa
+
+    console.log(mapa2);
+
+    //Almacenar en un arreglo las llaves y en otro arreglo los valores
+    const llavesMapa2 = [...mapa2.keys()];
+    const valoresMapa2 = [...mapa2.values()];
+
+    console.log(llavesMapa2, valoresMapa2);
+
+    console.clear();
+
+    /*
+    ----------------------------------------------------------------------------------------------------------------
+    WEAK SET and WEAK MAP
+    - Solo pueden almacenar referencias debiles, es decir, las llaves solo pueden ser del tipo objeto.
+    - Al solo almacenar referencias debiles (objetos), esto le permite al recolector de basura de JS o del navegador limpiarlas para 
+    mejorar el rendimiento.
+    - Tienen algunas carencias, por ejemplo no son iterables, no podemos eliminar con el "clear" como los sets y mapas normales,
+      tampoco podemos verificar su tamaño con "size".
+    */
+
+    //const weakSet = new WeakSet([1, 1, 2]); //no podemos crear de esta forma un WeakSet, tenemos que almacenar valores uno por uno 
+    const weakSet = new WeakSet();
+    // weakSet.add(1); //Al solo aceptar referencias debiles, es decir, objetos, aca habrá un error
+    let obj1 = { "llaveObjeto1": "valorObjeto1" };
+    let obj2 = { "llaveObjeto2": "valorObjeto2" };
+    let obj3 = { "llaveObjeto3": "valorObjeto3" };
+
+    weakSet.add(obj1);
+    weakSet.add(obj2);
+    weakSet.add(obj3);
+
+    console.log(weakSet);
+    console.log(weakSet.has(obj2)); //para verificar si tiene un valor
+
+    weakSet.delete(obj3);
+    console.log(weakSet);
+
+    weakSet.add(obj3)
+
+    //Cuando las referencias que tiene un Weak Set son nulas o indefinidas, estas se limpian, algo parecido a lo que sucede con el 
+    //tiempo de vida de un componente en VueJs
+    // setInterval(() => console.log(weakSet), 1000)
+
+    // setTimeout(() => {
+    //   obj1 = null;
+    //   obj2 = null;
+    //   obj3 = null;
+    // }, 2000);
   </script>
 </body>
 
