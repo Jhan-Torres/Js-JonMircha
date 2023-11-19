@@ -193,7 +193,7 @@
     const weakMap = new WeakMap()
 
     console.log(weakMap);
-    
+
     const valor1 = {};
     const valor2 = {};
     const valor3 = {};
@@ -202,19 +202,20 @@
     weakMap.set(valor2, 2);
 
     console.log(weakMap);
-    
+
     console.log(weakMap.has(valor1));
     console.log(weakMap.has(valor3));
 
     weakMap.set(valor3);
     weakMap.delete(valor3)
-    
+
     console.log(weakMap);
 
     weakMap.set(valor3, 3);
-    
+
     console.log(weakMap);
 
+    console.clear();
 
   </script>
 </body>
