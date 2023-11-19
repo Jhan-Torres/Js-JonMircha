@@ -158,6 +158,7 @@
       tampoco podemos verificar su tamaño con "size".
     */
 
+    //WEAK SET:
     //const weakSet = new WeakSet([1, 1, 2]); //no podemos crear de esta forma un WeakSet, tenemos que almacenar valores uno por uno 
     const weakSet = new WeakSet();
     // weakSet.add(1); //Al solo aceptar referencias debiles, es decir, objetos, aca habrá un error
@@ -186,6 +187,35 @@
     //   obj2 = null;
     //   obj3 = null;
     // }, 2000);
+    console.clear();
+
+    //WEAK MAP:
+    const weakMap = new WeakMap()
+
+    console.log(weakMap);
+    
+    const valor1 = {};
+    const valor2 = {};
+    const valor3 = {};
+
+    weakMap.set(valor1, 1);
+    weakMap.set(valor2, 2);
+
+    console.log(weakMap);
+    
+    console.log(weakMap.has(valor1));
+    console.log(weakMap.has(valor3));
+
+    weakMap.set(valor3);
+    weakMap.delete(valor3)
+    
+    console.log(weakMap);
+
+    weakMap.set(valor3, 3);
+    
+    console.log(weakMap);
+
+
   </script>
 </body>
 
