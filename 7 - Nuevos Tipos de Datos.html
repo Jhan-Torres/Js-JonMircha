@@ -2,222 +2,251 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
 </head>
 
 <body>
-  <script>
-    // Estos nuevos tipos de datos vienen desde 2015 con ECMASCRIPT6.
+	<script>
+		// Estos nuevos tipos de datos vienen desde 2015 con ECMASCRIPT6.
 
-    /*
-    ----------------------------------------------------------------------------------------------------------------
-    SYMBOL:
-    - Tipo de dato primitivo(como: String, Number, Boolean, etc).
-    - Su valor se mantiene privado y para uso interno.
-    - Generalmente se usan para agregar caracteristicas o propiedades de objetos.
-    - Permiten crear identificadores unicos, de referencia.
-    - Tipo de valor primitivo
-    */
-    let id1 = Symbol(); //No se crea mediante "NEW", debido a que no es un constructor
-    let id2 = Symbol(); //Acepta como parametro un numero o cadena de texto, es una etiqueta para identificar el tipo de symbol
-    console.log(id1 === id2); //Al ser tipos "Symbol", tienen identificadores diferentes por lo que no son iguales
+		/*
+		----------------------------------------------------------------------------------------------------------------
+		SYMBOL:
+		- Tipo de dato primitivo(como: String, Number, Boolean, etc).
+		- Su valor se mantiene privado y para uso interno.
+		- Generalmente se usan para agregar caracteristicas o propiedades de objetos.
+		- Permiten crear identificadores unicos, de referencia.
+		- Tipo de valor primitivo
+		*/
+		let id1 = Symbol(); //No se crea mediante "NEW", debido a que no es un constructor
+		let id2 = Symbol(); //Acepta como parametro un numero o cadena de texto, es una etiqueta para identificar el tipo de symbol
+		console.log(id1 === id2); //Al ser tipos "Symbol", tienen identificadores diferentes por lo que no son iguales
 
-    const NOMBRE = Symbol("Nombre");
+		const NOMBRE = Symbol("Nombre");
 
-    const persona = {
-      [NOMBRE]: "Jhan" //[] para tipos de datos "Symbol"
-    }
+		const persona = {
+			[NOMBRE]: "Jhan" //[] para tipos de datos "Symbol"
+		}
 
-    console.log(persona); //{Symbol(): "Jhan"}  -> Muestra el tipo de dato(Symbol), mas no el nombre de la propiedad [NOMBRE]  
+		console.log(persona); //{Symbol(): "Jhan"}  -> Muestra el tipo de dato(Symbol), mas no el nombre de la propiedad [NOMBRE]  
 
-    persona.NOMBRE = "Jhan Marco";  //crea otra propiedad en el objeto persona llamada "NOMBRE";
-    persona[NOMBRE] = "Jhan Marco"; //actualiza el valor del Symbol, pero el nombre de la propiedad sigue siendo "Symbol()"
+		persona.NOMBRE = "Jhan Marco";  //crea otra propiedad en el objeto persona llamada "NOMBRE";
+		persona[NOMBRE] = "Jhan Marco"; //actualiza el valor del Symbol, pero el nombre de la propiedad sigue siendo "Symbol()"
 
-    console.log(persona); //{NOMBRE: "Jhan Marco", Symbol(): "Jhan Marco"}
+		console.log(persona); //{NOMBRE: "Jhan Marco", Symbol(): "Jhan Marco"}
 
-    const SALUDAR = Symbol("Saludar");
+		const SALUDAR = Symbol("Saludar");
 
-    persona[SALUDAR] = () => {
-      console.log("Hello!");
-    }
+		persona[SALUDAR] = () => {
+			console.log("Hello!");
+		}
 
-    console.log(persona);
-    console.log(persona.SALUDAR); //en este caso para invocar una funcion "Symbol", tenemos que hacerlo con []
-    persona[SALUDAR]();
+		console.log(persona);
+		console.log(persona.SALUDAR); //en este caso para invocar una funcion "Symbol", tenemos que hacerlo con []
+		persona[SALUDAR]();
 
-    //Recorriendo el objeto "persona", solo mostrará la propiedad "NOMBRE" y su valor "Jhan Marco", los symbol no lo muestra
-    console.log(persona);
-    for (const key in persona) {
-      console.log(`${key}:${persona[key]}`); //OutPut: NOMBRE:Jhan Marco
-    }
+		//Recorriendo el objeto "persona", solo mostrará la propiedad "NOMBRE" y su valor "Jhan Marco", los symbol no lo muestra
+		console.log(persona);
+		for (const key in persona) {
+			console.log(`${key}:${persona[key]}`); //OutPut: NOMBRE:Jhan Marco
+		}
 
-    //Para poder listar las propiedades tenemos un metodo "Object.getOwnPropertySymbols(#objeto)" :
-    console.log(Object.getOwnPropertySymbols(persona));
+		//Para poder listar las propiedades tenemos un metodo "Object.getOwnPropertySymbols(#objeto)" :
+		console.log(Object.getOwnPropertySymbols(persona));
 
-    console.clear();
+		console.clear();
 
 
-    /*
-    ----------------------------------------------------------------------------------------------------------------
-    SETS:
-    - Parecido a un arreglo de JS que solo acepta valores únicos, hablando de valores primitivos.
-    - Tipo de valor compuesto o complejo
-    */
+		/*
+		----------------------------------------------------------------------------------------------------------------
+		SETS:
+		- Parecido a un arreglo de JS que solo acepta valores únicos, hablando de valores primitivos.
+		- Tipo de valor compuesto o complejo
+		*/
 
-    /*Propiedades:
-      - .size             -> para la longitud
-      - .add(#valor)      -> para añadir valores, si es valor repetido no se agregará
-      - .delete(#valor)   -> para eliminar algun valor
-      - .has(#valor)      -> para comprobar si tiene algun valor: true o false
-      - .clear()          -> para eliminar todos los valores del set 
-    */
+		/*Propiedades:
+			- .size             -> para la longitud
+			- .add(#valor)      -> para añadir valores, si es valor repetido no se agregará
+			- .delete(#valor)   -> para eliminar algun valor
+			- .has(#valor)      -> para comprobar si tiene algun valor: true o false
+			- .clear()          -> para eliminar todos los valores del set 
+		*/
 
-    const set = new Set([2, 3, 4, 4, 5, true, {}, {}, "Hey!"]);
-    console.log(set); //Output: Set(8) {2, 3, 4, 5, true, Object, Object, "Hey!"}  -> notese que no duplica el valor 4
+		const set = new Set([2, 3, 4, 4, 5, true, {}, {}, "Hey!"]);
+		console.log(set); //Output: Set(8) {2, 3, 4, 5, true, Object, Object, "Hey!"}  -> notese que no duplica el valor 4
 
-    const arr1 = [2, 2, 3, 3, 4, 4, 5, 5];
-    const setArray1 = new Set([...arr1]); //filtrará los datos repetidos
-    console.log(arr1);
-    console.log(setArray1);
+		const arr1 = [2, 2, 3, 3, 4, 4, 5, 5];
+		const setArray1 = new Set([...arr1]); //filtrará los datos repetidos
+		console.log(arr1);
+		console.log(setArray1);
 
-    //para recorrer se puede usar los ciclos de un array normal (for of y forEach)
-    for (const item of setArray1) {
-      console.log(item);
-    }
+		//para recorrer se puede usar los ciclos de un array normal (for of y forEach)
+		for (const item of setArray1) {
+			console.log(item);
+		}
 
-    console.log(setArray1[0]);  //Undefined
-    //Para acceder a su posicion, tenemos que volver al set a un tipo de dato "iterable" con Array.from  :
-    const arr = Array.from(set)
-    console.log(arr[0]);
+		console.log(setArray1[0]);  //Undefined
+		//Para acceder a su posicion, tenemos que volver al set a un tipo de dato "iterable" con Array.from  :
+		const arr = Array.from(set)
+		console.log(arr[0]);
 
-    console.clear();
+		console.clear();
 
-    /*
-    ----------------------------------------------------------------------------------------------------------------
-    MAPS:
-    - Objetos que nos sirven para almacenar un conjunto de valores asociados a manera de objeto, parecido a un objeto primitivo.
-    - Trabajan similarmente con getters y setters como una clase con POO.
-    - Es iterable.
-    - Una diferencia de los mapas con los objetos primitivos es que el nombre de la propiedad de los mapas podemos ponder cualquier
-      valor, a diferencia de los objetos primitivos en los cuales solo podemos poner cadenas de texto como nombre de la propiedad. 
-    - Tipo de valor compuesto o complejo.
-    - No hay mucha utilidad para este tipo de datos
-    */
+		/*
+		----------------------------------------------------------------------------------------------------------------
+		MAPS:
+		- Objetos que nos sirven para almacenar un conjunto de valores asociados a manera de objeto, parecido a un objeto primitivo.
+		- Trabajan similarmente con getters y setters como una clase con POO.
+		- Es iterable.
+		- Una diferencia de los mapas con los objetos primitivos es que el nombre de la propiedad de los mapas podemos ponder cualquier
+			valor, a diferencia de los objetos primitivos en los cuales solo podemos poner cadenas de texto como nombre de la propiedad. 
+		- Tipo de valor compuesto o complejo.
+		- No hay mucha utilidad para este tipo de datos
+		*/
 
-    const mapa = new Map();
+		const mapa = new Map();
 
-    mapa.set("Nombre", "Jhan Marco"); //.set("propiedad", "valor") -> para agregar propiedad - valor
-    mapa.set("Apellido", "Torres Edquen");
-    mapa.set("Edad", 23);
+		mapa.set("Nombre", "Jhan Marco"); //.set("propiedad", "valor") -> para agregar propiedad - valor
+		mapa.set("Apellido", "Torres Edquen");
+		mapa.set("Edad", 23);
 
-    console.log(mapa);                //  {'Nombre' => 'Jhan Marco', 'Apellido' => 'Torres Edquen', 'Edad' => 23} -> parecido a un objeto
-    console.log(mapa.size);           //  3   -> para el tamaño del mapa
-    console.log(mapa.has("correo"));  // false -> .has("propiedad") para verificar si tiene esa propiedad 
-    console.log(mapa.get("Edad"));    //23  -> para obtener un valor .get("propiedad")
-    console.log(mapa.set("Edad", 24));// para reemplazar la propiedad indicada
-    mapa.delete("Apellido");    // para eliminar la propiedad indicada
-    console.log(mapa);
+		console.log(mapa);                //  {'Nombre' => 'Jhan Marco', 'Apellido' => 'Torres Edquen', 'Edad' => 23} -> parecido a un objeto
+		console.log(mapa.size);           //  3   -> para el tamaño del mapa
+		console.log(mapa.has("correo"));  // false -> .has("propiedad") para verificar si tiene esa propiedad 
+		console.log(mapa.get("Edad"));    //23  -> para obtener un valor .get("propiedad")
+		console.log(mapa.set("Edad", 24));// para reemplazar la propiedad indicada
+		mapa.delete("Apellido");    // para eliminar la propiedad indicada
+		console.log(mapa);
 
-    for (let [key, value] of mapa) {
-      console.log(`Clave: ${key} - Valor: ${value}`);
-    }
+		for (let [key, value] of mapa) {
+			console.log(`Clave: ${key} - Valor: ${value}`);
+		}
 
-    mapa.set(19, "diecinueve"); //Agregando valores primitivos como nombre de propiedad
-    mapa.set(true, "true");  //Agregando valores primitivos como nombre de propiedad
+		mapa.set(19, "diecinueve"); //Agregando valores primitivos como nombre de propiedad
+		mapa.set(true, "true");  //Agregando valores primitivos como nombre de propiedad
 
-    console.log(mapa);
+		console.log(mapa);
 
-    //Inicializar un mapa con el constructor:
-    const mapa2 = new Map([
-      ["nombre", "Ana"],
-      ["edad", 21],
-      [null, "nulo"]
-    ])
+		//Inicializar un mapa con el constructor:
+		const mapa2 = new Map([
+			["nombre", "Ana"],
+			["edad", 21],
+			[null, "nulo"]
+		])
 
-    mapa2.clear(); //Para limpiar todo el mapa
+		mapa2.clear(); //Para limpiar todo el mapa
 
-    console.log(mapa2);
+		console.log(mapa2);
 
-    //Almacenar en un arreglo las llaves y en otro arreglo los valores
-    const llavesMapa2 = [...mapa2.keys()];
-    const valoresMapa2 = [...mapa2.values()];
+		//Almacenar en un arreglo las llaves y en otro arreglo los valores
+		const llavesMapa2 = [...mapa2.keys()];
+		const valoresMapa2 = [...mapa2.values()];
 
-    console.log(llavesMapa2, valoresMapa2);
+		console.log(llavesMapa2, valoresMapa2);
 
-    console.clear();
+		console.clear();
 
-    /*
-    ----------------------------------------------------------------------------------------------------------------
-    WEAK SET and WEAK MAP
-    - Solo pueden almacenar referencias debiles, es decir, las llaves solo pueden ser del tipo objeto.
-    - Al solo almacenar referencias debiles (objetos), esto le permite al recolector de basura de JS o del navegador limpiarlas para 
-    mejorar el rendimiento.
-    - Tienen algunas carencias, por ejemplo no son iterables, no podemos eliminar con el "clear" como los sets y mapas normales,
-      tampoco podemos verificar su tamaño con "size".
-    */
+		/*
+		----------------------------------------------------------------------------------------------------------------
+		WEAK SET and WEAK MAP
+		- Solo pueden almacenar referencias debiles, es decir, las llaves solo pueden ser del tipo objeto.
+		- Al solo almacenar referencias debiles (objetos), esto le permite al recolector de basura de JS o del navegador limpiarlas para 
+		mejorar el rendimiento.
+		- Tienen algunas carencias, por ejemplo no son iterables, no podemos eliminar con el "clear" como los sets y mapas normales,
+			tampoco podemos verificar su tamaño con "size".
+		*/
 
-    //WEAK SET:
-    //const weakSet = new WeakSet([1, 1, 2]); //no podemos crear de esta forma un WeakSet, tenemos que almacenar valores uno por uno 
-    const weakSet = new WeakSet();
-    // weakSet.add(1); //Al solo aceptar referencias debiles, es decir, objetos, aca habrá un error
-    let obj1 = { "llaveObjeto1": "valorObjeto1" };
-    let obj2 = { "llaveObjeto2": "valorObjeto2" };
-    let obj3 = { "llaveObjeto3": "valorObjeto3" };
+		//WEAK SET:
+		//const weakSet = new WeakSet([1, 1, 2]); //no podemos crear de esta forma un WeakSet, tenemos que almacenar valores uno por uno 
+		const weakSet = new WeakSet();
+		// weakSet.add(1); //Al solo aceptar referencias debiles, es decir, objetos, aca habrá un error
+		let obj1 = { "llaveObjeto1": "valorObjeto1" };
+		let obj2 = { "llaveObjeto2": "valorObjeto2" };
+		let obj3 = { "llaveObjeto3": "valorObjeto3" };
 
-    weakSet.add(obj1);
-    weakSet.add(obj2);
-    weakSet.add(obj3);
+		weakSet.add(obj1);
+		weakSet.add(obj2);
+		weakSet.add(obj3);
 
-    console.log(weakSet);
-    console.log(weakSet.has(obj2)); //para verificar si tiene un valor
+		console.log(weakSet);
+		console.log(weakSet.has(obj2)); //para verificar si tiene un valor
 
-    weakSet.delete(obj3);
-    console.log(weakSet);
+		weakSet.delete(obj3);
+		console.log(weakSet);
 
-    weakSet.add(obj3)
+		weakSet.add(obj3)
 
-    //Cuando las referencias que tiene un Weak Set son nulas o indefinidas, estas se limpian, algo parecido a lo que sucede con el 
-    //tiempo de vida de un componente en VueJs
-    // setInterval(() => console.log(weakSet), 1000)
+		//Cuando las referencias que tiene un Weak Set son nulas o indefinidas, estas se limpian, algo parecido a lo que sucede con el 
+		//tiempo de vida de un componente en VueJs
+		// setInterval(() => console.log(weakSet), 1000)
 
-    // setTimeout(() => {
-    //   obj1 = null;
-    //   obj2 = null;
-    //   obj3 = null;
-    // }, 2000);
-    console.clear();
+		// setTimeout(() => {
+		//   obj1 = null;
+		//   obj2 = null;
+		//   obj3 = null;
+		// }, 2000);
+		console.clear();
 
-    //WEAK MAP:
-    const weakMap = new WeakMap()
+		//WEAK MAP:
+		const weakMap = new WeakMap()
 
-    console.log(weakMap);
+		console.log(weakMap);
 
-    const valor1 = {};
-    const valor2 = {};
-    const valor3 = {};
+		const valor1 = {};
+		const valor2 = {};
+		const valor3 = {};
 
-    weakMap.set(valor1, 1);
-    weakMap.set(valor2, 2);
+		weakMap.set(valor1, 1);
+		weakMap.set(valor2, 2);
 
-    console.log(weakMap);
+		console.log(weakMap);
 
-    console.log(weakMap.has(valor1));
-    console.log(weakMap.has(valor3));
+		console.log(weakMap.has(valor1));
+		console.log(weakMap.has(valor3));
 
-    weakMap.set(valor3);
-    weakMap.delete(valor3)
+		weakMap.set(valor3);
+		weakMap.delete(valor3)
 
-    console.log(weakMap);
+		console.log(weakMap);
 
-    weakMap.set(valor3, 3);
+		weakMap.set(valor3, 3);
 
-    console.log(weakMap);
+		console.log(weakMap);
 
-    console.clear();
+		console.clear();
 
-  </script>
+
+		//ITERABLES E ITERADORES
+		//Iterable -> Significa que es una estructura de datos lineal, hace que sus elementos sean publicos y se puedan recorrer.
+		//Iterador -> Es la interfaz, parecido a un pointer, que recorre los elementos de la estructura de datos.
+
+		const iterable1 = [1, 2, 3, 4, 5];
+		const iterable2 = "Hello, world!";
+
+		//acceder al iterador del elemento iterable:
+		const iterador1 = iterable1[Symbol.iterator]();
+		const iterador2 = iterable2[Symbol.iterator]();
+
+		console.log(iterable1);
+		console.log(iterable2);
+		console.log(iterador1); //En este caso al ser el iterable un array, el tipo de iterador será "Array Iterator";
+		console.log(iterador2); //En este caso al ser el iterable un array, el tipo de iterador será "StringIterator";
+
+		//METODOS DEL ITERADOR
+		//iterador.next() -> devuelve un objeto con 2 propiedades: {value: valoriterador, done: boolean } -> "value" es el valor
+		//actual del iterador y "done" que indica si el elemento iterable ya se quedó sin elementos para iterar.
+		console.log(iterador1.next());
+		console.clear();
+
+
+		//GENERATORS (Generadores):
+		//Funcion que nos permite trabajar de una forma mas amigable con los iteradores:
+		function* iterable() {
+
+		}
+	</script>
 </body>
 
 </html>
