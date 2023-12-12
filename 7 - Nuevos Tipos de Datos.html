@@ -243,8 +243,54 @@
 
 		//GENERATORS (Generadores):
 		//Funcion que nos permite trabajar de una forma mas amigable con los iteradores:
+		//"yield" -> es como el "return" de una funcion generadora.		
 		function* iterable() {
+			yield "hola";
+			console.log("Hola desde consola");
+			yield "hola 2";
+			console.log("Más líneas de código");
+			yield "hola 3";
+			yield "hola 4";
+		}
 
+		//Mostrando los valores de la funcion generadora:
+		let iterador = iterable();
+		//console.log(iterador.next()); //{value: 'hola', done: false}
+		//console.log(iterador.next());	//Hola desde consola			{value: 'hola 2', done: false}
+		//console.log(iterador.next());	//Más líneas de código 		{value: 'hola 3', done: false}
+		//console.log(iterador.next());	//{value: 'hola 4', done: false}
+		//console.log(iterador.next());	//{value: undefined, done: true}
+
+		//Mostrar los valores de la funcion generadora con un bucle for:
+		// for (let y of iterador) {
+		// 	console.log(y);
+		// }
+
+		//Podemos guardar los valores de yield en un array:
+		const arrayYields = [...iterable()];
+		console.log(arrayYields);
+
+		//Ejercicio
+		function cuadrado(valor) {
+			setTimeout(() => {
+				return console.log({ valor, resultado: valor * valor });
+			}, Math.random() * 1000);
+		}
+
+		function* generador() {
+			console.log("Inicia Generador");
+			yield cuadrado(0);
+			yield cuadrado(1);
+			yield cuadrado(2);
+			yield cuadrado(3);
+			yield cuadrado(4);
+			yield cuadrado(5);
+			console.log("Finaliza Generador");
+		}
+
+		let gen = generador();
+		for (let y of gen) {
+			console.log(y);
 		}
 	</script>
 </body>
