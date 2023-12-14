@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //THIS:
+    //palabra reservada que apunta al objeto en el que se esta trabajando, pero en JS tiene que ver con los scopes o bloques
+    //Cuando usamos el JS de los navegadores, "THIS" hace referencia al objeto "Window":
+    console.log(this);
+    console.log(window);
+    console.log(this === window); //true
+
+    this.nombre = "Contexto Global"; //agregando una propiedad a window
+    console.log(this.nombre);		//"Contexto Global"
+
+    function imprimir() {
+      console.log(this.nombre);
+    }
+
+    imprimir();									//"Contexto Global"
+
+    const obj = {
+      nombre: "Contexto Objeto",
+      imprimir: function () {
+        console.log(this.nombre);
+      }
+    }
+    obj.imprimir(); 					//"Contexto Objeto"
+
+    const obj_2 = {
+      nombre: "Contexto Objeto 2",
+      imprimir
+    }
+    obj_2.imprimir();					//"Contexto Objeto 2"
+
+    const obj_3 = {
+      nombre: "Contexto Objeto 3",
+      imprimir: () => {
+        console.log(this.nombre);
+      }
+    }
+    obj_3.imprimir();					//"Contexto Global"
+    //Una arrow function trabaja diferente, debido a que mantiene un enlace del context donde ha sido creado (linea 351). La 
+    //arrow function no maneja su propio SCOPE, lo que hace es heredar el contexto del padre en donde fue creada.
+
+    function Persona(nombre) {
+      this.nombre = nombre;
+      return function () {
+        console.log(this.nombre);
+      }
+    }
+
+    let persona1 = new Persona("Jhan");
+    persona1(); //"Contexto Global", sale esta respuesta debido a que en el return(linea 386) se esta creando un nuevo SCOPE, 
+    //internamente esa funcion anonima no tiene una propiedad "nombre", por lo que lee el this del SCOPE global. Si queremos
+    //cambiar ese comportamiento, podemos usar una arrow function. 
+
+
+  </script>
+</body>
+
+</html>

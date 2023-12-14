@@ -271,27 +271,76 @@
 		console.log(arrayYields);
 
 		//Ejercicio
-		function cuadrado(valor) {
-			setTimeout(() => {
-				return console.log({ valor, resultado: valor * valor });
-			}, Math.random() * 1000);
+		// function cuadrado(valor) {
+		// 	setTimeout(() => {
+		// 		return console.log({ valor, resultado: valor * valor });
+		// 	}, Math.random() * 1000);
+		// }
+
+		// function* generador() {
+		// 	console.log("Inicia Generador");
+		// 	yield cuadrado(0);
+		// 	yield cuadrado(1);
+		// 	yield cuadrado(2);
+		// 	yield cuadrado(3);
+		// 	yield cuadrado(4);
+		// 	yield cuadrado(5);
+		// 	console.log("Finaliza Generador");
+		// }
+
+		// let gen = generador();
+		// for (let y of gen) {
+		// 	console.log(y);
+		// }
+
+		console.clear();
+
+		//PROXIES
+		/*
+		Es un mecanismo que nos permite crear un objeto basado en un objeto literal inicial, parecido a la POO, pero en lugar
+		de utilizar clases como una plantilla, vamos a usar un objeto literal. El proxy recibe el objeo literal, crea un copia
+		y va a permitir que se realicen ciertas operaciones, como validacion de propiedades, validacion de tipos de datos, etc.
+		Es decir se va a tener un medio de vinculacion entre el objeto del cual se basa y la nueva instancia que se ha creado. Todo
+		eso se administra a traves de un objeto especial que tambien recibe el proxy conocido como "handler":
+		*/
+		const objectoPersona = {
+			nombre: "",
+			apellido: "",
+			edad: 0
 		}
 
-		function* generador() {
-			console.log("Inicia Generador");
-			yield cuadrado(0);
-			yield cuadrado(1);
-			yield cuadrado(2);
-			yield cuadrado(3);
-			yield cuadrado(4);
-			yield cuadrado(5);
-			console.log("Finaliza Generador");
+		const handler = {
+			set(obj, prop, valor) {
+				if (Object.keys(obj).indexOf(prop) === -1) { //para validar si se añade valores adicionales
+					return console.log("La propiedad no existe en el objeto base");
+				}
+				obj[prop] = valor; //Aca le decimos que podemos crear valores
+			}
 		}
 
-		let gen = generador();
-		for (let y of gen) {
-			console.log(y);
-		}
+		const jhan = new Proxy(persona, handler) //Proxy("objeto en el cual se basa", "handler");
+		jhan.nombre = "jhan";
+		jhan.apellido = "torres";
+		jhan.edad = 24;
+		jhan.twitter = "@jhantorres"; //Si añadimos una propiedad, tambien se añadirá al objeto literal base
+		console.log(jhan);
+		console.log(persona);
+		console.clear();
+
+		//PROPIEDADES DINAMICAS DE LOS OBJETOS O "COMPUTED PROPERTIES"
+		//Para crear propiedades cuando se esta en ejecucion, es decir, que se definirá según un valor calculado o transmitido 
+		const objUsuarios = {
+			[`id_${Math.round(Math.random() * 100 + 5)}`]: "Valor aleatorio" //[] -> para realizar una propiedad dinamica 
+		};
+		console.log(objUsuarios);
+
+		const usuarios = ["Jhan", "Irma", "Ana", "José"];
+		usuarios.forEach((usuario, index) => {
+			objUsuarios[`id_${index}`] = usuario; //Creando propiedades dinamicas
+		});
+		console.log(objUsuarios);
+		console.clear();
+
 	</script>
 </body>
 
