@@ -64,6 +64,55 @@
     persona1(); //"Contexto Global", sale esta respuesta debido a que en el return(linea 58) se esta creando un nuevo SCOPE, 
     //internamente esa funcion anonima no tiene una propiedad "nombre", por lo que lee la propiedad en el SCOPE global. Si queremos
     //cambiar ese comportamiento, podemos usar una arrow function.
+    console.clear();
+
+    //METODOS: CALL, APPLY, BIND
+    //se usan para conservar la referencia de un scope en particular y usarla en otro lado:
+    
+    this.lugar = "Contexto Global"; //Agregando una propiedad al contexto global
+
+    function saludar(saludo, receptor) {
+      console.log(`${saludo} ${receptor} desde el ${this.lugar}`);
+    }
+
+    saludar("Hola", "Usuario"); //"Hola Usuario desde el Contexto global"
+
+    const object = {
+      lugar: "Contexto object",
+    }
+
+    //CALL: manda a llamar un contexto que le pasamos como 1er parametro.
+    saludar.call(object, "Hola", "Ann"); //"Hola Ann desde el Context Object" 
+    //ejecutando saludar(), pero llamando un nuevo contexto, en este caso object (linea 80)
+    
+    //APPLY: parecido al CALL pero se diferencia en que recibe los parametros en un array
+    saludar.apply(object, ["Bye", "Jhan"]); //"Bye Jhan desde el Context Object"
+    //ejecutando saludar(), pero asignando un nuevo contexto, en este caso object (linea 80)
+
+      //NOTA para apply o call:
+      //Si le pasamos un context "null", este tomará los valores del contexto global:
+      saludar.apply(null, ["Hola", "Ann"]);
+      //Pero si le pasamos "this", este tomara los valorex del contexto padre, para este caso el padre tambien es global:
+      saludar.call(this, "Bye", "Jhan");
+
+    //BIND: para enlazar contextos
+    const persona = {
+      nombre: "Jhan",
+      saludar: function() {
+        console.log(`Hola ${this.nombre}`);
+      }
+    }
+
+    persona.saludar(); //"Hola Jhan"
+
+    const otraPersona = {
+      nombre: "asd",
+      saludar: persona.saludar.bind(persona)
+    }
+
+    otraPersona.saludar(); //"Hola Jhan", ya que el bind (linea 109) enlaza los contextos de los objetos "persona" y "otraPersona", 
+    //por lo que la propiedad "nombre" del objeto "otraPersona" no será tomado en cuenta.
+
   </script>
 </body>
 
