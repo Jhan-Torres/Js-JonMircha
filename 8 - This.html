@@ -31,13 +31,13 @@
         console.log(this.nombre);
       }
     }
-    obj.imprimir(); 					//"Contexto Objeto"
+    obj.imprimir(); 					//"Contexto Objeto", debido al scope del objeto creado en la linea 28.
 
     const obj_2 = {
       nombre: "Contexto Objeto 2",
       imprimir
     }
-    obj_2.imprimir();					//"Contexto Objeto 2"
+    obj_2.imprimir();					//"Contexto Objeto 2", estamos asignando la funcion imprimir(linea 22) pero en el scope del objeto 2
 
     const obj_3 = {
       nombre: "Contexto Objeto 3",
@@ -45,23 +45,25 @@
         console.log(this.nombre);
       }
     }
+
     obj_3.imprimir();					//"Contexto Global"
-    //Una arrow function trabaja diferente, debido a que mantiene un enlace del context donde ha sido creado (linea 351). La 
-    //arrow function no maneja su propio SCOPE, lo que hace es heredar el contexto del padre en donde fue creada.
+    //Una arrow function trabaja diferente, debido a que mantiene un enlace del contexto donde ha sido creada el objeto en
+    // donde aparece, en este caso (contexto del objeto 3), que sería el contexto global, asi que this.nombre = "contexto global". 
+    //La arrow function no maneja su propio SCOPE, lo que hace es heredar el contexto del padre en donde fue creada.
+    // Si estamos trabajando en la creacion de un objeto y dentro de ese objeto tenemos propiedades, metodos y estos van a interactuar
+    //con propiedades del objeto padre, se recomienda no usar arrow functions. 
 
     function Persona(nombre) {
       this.nombre = nombre;
-      return function () {
+      return function () { //"closure", envolviendo una funcion dentro de otra funcion
         console.log(this.nombre);
       }
     }
 
     let persona1 = new Persona("Jhan");
-    persona1(); //"Contexto Global", sale esta respuesta debido a que en el return(linea 386) se esta creando un nuevo SCOPE, 
-    //internamente esa funcion anonima no tiene una propiedad "nombre", por lo que lee el this del SCOPE global. Si queremos
-    //cambiar ese comportamiento, podemos usar una arrow function. 
-
-
+    persona1(); //"Contexto Global", sale esta respuesta debido a que en el return(linea 58) se esta creando un nuevo SCOPE, 
+    //internamente esa funcion anonima no tiene una propiedad "nombre", por lo que lee la propiedad en el SCOPE global. Si queremos
+    //cambiar ese comportamiento, podemos usar una arrow function.
   </script>
 </body>
 
