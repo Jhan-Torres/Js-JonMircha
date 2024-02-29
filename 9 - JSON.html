@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //JSON - JavaScript Object Notation
+    //Formato ligero de intercambio de datos, es un estandar para todos los lenguajes de programacion
+    //Acepta los tipos de datos: string, number, object, array, boolean y null, NOTA: NO SE ACEPTA UNDEFINED
+    //Todas las propiedades deben tener "", no acepta '' o ``.
+
+    const json = {
+      "cadena" : "Ann",
+      "number" : "22",
+      "object" : {
+        "nombre" : "objeto"
+      },
+      "array" : ["1", "2", "3"],
+      "boolean" : "true",
+      "null" : null
+    }
+
+    //Tiene 2 métodos:
+      //JSON.parse()      --> Convierte un JSON (cadena de texto) en un tipo de dato que sea válido en JS 
+      //console.log(JSON.parse("asd"));   //error ya que "asd" no es un tipo de dato en JS
+      console.log(JSON.parse(`{"x":2, "y":3}`));      //lo convierte a un objeto en JS, por lo que se puede acceder a sus metodos
+      console.log(JSON.parse("true"));    //lo convierte al tipo de dato true en JS
+      console.log(JSON.parse("null"));    //lo convuerte al null en JS
+      
+      //JSON.stringify()  --> Convierte un objeto o valor válido en JS en una cadena de texto JSON
+      console.log(JSON.stringify({x:2, y:3}));    //lo convierte en la cadena de texto {"x":2,"y":3}, NOTA: stringify agrega las ""
+      console.log(JSON.stringify(null));  //lo convierte en la cadena de texto "null"
+      console.log(JSON.stringify(true));  //lo convierte en la cadena de texto "true"
+  </script>
+</body>
+</html>
