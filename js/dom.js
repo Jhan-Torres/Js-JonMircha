@@ -50,15 +50,10 @@ console.log(document.querySelectorAll("a")); //para retornar todas las coinciden
 //para filtrar las listas que solo estan dentro del menu
 console.log(document.querySelectorAll("#menu li"));
 
-console.clear();
 
-//INTERACTUAR CON LOS ATRIBUTOS Y DATA-ATTRIBUTES
-/* 
-  data attributes --> permite almacenar informacion extra en los nodos html o añadir atributos extra, solo se necesita
-  anteponer la palabra "data-" seguido de cualquier nombre. p.e   data-description="..."
-*/
+//INTERACTUAR CON LOS ATRIBUTOS DE ETIQUETAS HTML 
 
-//ACCEDER A LOS ATRIBUTOS DE ETIQUETAS HTML 
+//ACCEDER A LOS ATRIBUTOS
 //Existen 2 formas: notacion del punto "." y con .getAttribute(#attributeName)
 console.log(document.documentElement.lang);                 //en
 console.log(document.documentElement.getAttribute("lang")); //en
@@ -77,6 +72,58 @@ console.log(document.documentElement.lang);                 //en
 
 
 //GUARDAR UN NODO HTML EN UNA VARIABLE:
-//NOTA: 
-const linkDOM = document.querySelector(".link-dom");
+/* 
+  NOTA: hay algunos desarrolladores que anteponen el simbolo "$" para variables que guarden elementos de HTML y para 
+  diferenciar de variables que se usan para la logica.
+*/
+const $linkDOM = document.querySelector(".link-dom");
+
+//AÑADIR NUEVOS ATRIBUTOS:
+$linkDOM.setAttribute("target", "_blank");
+$linkDOM.setAttribute("rel", "noopener");
+/* 
+  noopener --> indica al navegador que vaya al recurso de destino "href" sin otorgar al nuevo contexto de 
+  navegación acceso al documento que lo abrió. Esto es útil al abrir enlaces que no son de confianza para
+  garantizar que no puedan alterar el documento de origen a través de la propiedad Window.opener
+*/  
+
+//QUITAR ATRIBUTOS:
+$linkDOM.removeAttribute("target");
+
+//VALIDAR ATRIBUTOS:
+console.log($linkDOM.hasAttribute("rel"));; //true
+
+
+//INTERACTUAR CON DATA-ATTRIBUTES DE ETIQUETAS HTML:
+/* 
+  data attributes --> permite almacenar informacion extra en los nodos html o añadir atributos extra, solo se necesita
+  anteponer la palabra "data-" seguido de cualquier nombre. p.e   data-description="..."
+  Se pueden trabajar con estos de igual manera que los atributos normales:
+*/
+
+//ACCEDER
+//para acceder a un data-attribute con la notacion del punto, primero tenemos que acceder al "datset". Este "dataset" guarda a 
+//manera de un "map" a todos los "data-attributes" que hayamos especificado. 
+console.log($linkDOM.dataset);                          //DOMStringMap {description: 'Document Object Model'}
+console.log($linkDOM.dataset.description);              //Document Object Model
+
+console.log($linkDOM.getAttribute("data-description")); //Document Object Model
+
+//EDITAR
+$linkDOM.setAttribute("data-description", "Dom");
+console.log($linkDOM.getAttribute("data-description")); //Dom
+
+$linkDOM.dataset.description = "Document Object Model";
+console.log($linkDOM.getAttribute("data-description")); //Document Object Model
+
+//VALIDAR 
+console.log($linkDOM.hasAttribute("data-description")); //true
+
+//ELIMINAR
+$linkDOM.removeAttribute("data-description");
+console.log($linkDOM.hasAttribute("data-description")); //false
+
+console.clear();
+
+
 
