@@ -50,4 +50,33 @@ console.log(document.querySelectorAll("a")); //para retornar todas las coinciden
 //para filtrar las listas que solo estan dentro del menu
 console.log(document.querySelectorAll("#menu li"));
 
+console.clear();
+
+//INTERACTUAR CON LOS ATRIBUTOS Y DATA-ATTRIBUTES
+/* 
+  data attributes --> permite almacenar informacion extra en los nodos html o añadir atributos extra, solo se necesita
+  anteponer la palabra "data-" seguido de cualquier nombre. p.e   data-description="..."
+*/
+
+//ACCEDER A LOS ATRIBUTOS DE ETIQUETAS HTML 
+//Existen 2 formas: notacion del punto "." y con .getAttribute(#attributeName)
+console.log(document.documentElement.lang);                 //en
+console.log(document.documentElement.getAttribute("lang")); //en
+
+//aparentemente en este caso no hay diferencias, pero veamos el siguiente ejemplo:
+console.log(document.querySelector(".link-dom").href);                  //http://127.0.0.1:5500/10%20-%20Web%20APIs.html
+console.log(document.querySelector(".link-dom").getAttribute("href"));  //10 - Web APIs.html  --> este es el valor que esta escrito en ese href
+
+//EDITAR VALORES DE LOS ATRIBUTOS DE ETIQUETAS HTML:
+//Existen 2 formas: notacion del punto "." y con .setAttribute(#attributeName, #newValue)
+document.documentElement.lang = "es"; 
+console.log(document.documentElement.lang);                 //es
+
+document.documentElement.setAttribute("lang", "en");
+console.log(document.documentElement.lang);                 //en
+
+
+//GUARDAR UN NODO HTML EN UNA VARIABLE:
+//NOTA: 
+const linkDOM = document.querySelector(".link-dom");
 
