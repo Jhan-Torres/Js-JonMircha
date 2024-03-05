@@ -4,6 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    /* root --> es un selector css que permite manejar el nodo principal de un documento, en html “:root” es igual a decir “html”, 
+      la ventaja es que :root tiene mayor prioridad(especificidad). Es muy utilizado para iniciar las variables css justamente por eso.  
+    */
+    :root { 
+      --yellow-color: #f7df1e;
+      --dark-color: #222;
+    }
+  </style>
 </head>
 <body>
   <h1>APIS DE JS EN EL NAVEGADOR</h1>
@@ -31,7 +40,12 @@
   </nav>
 
   <input type="text" placeholder="nombre">
-  <a class="link-dom" href="10 - Web APIs.html" data-description="Document Object Model">
+  <a 
+    class="link-dom" 
+    href="10 - Web APIs.html" 
+    data-description="Document Object Model" 
+    style="background-color: aqua; color: blue;"
+  >
     Dom
   </a>
 

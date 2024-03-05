@@ -123,7 +123,46 @@ console.log($linkDOM.hasAttribute("data-description")); //true
 $linkDOM.removeAttribute("data-description");
 console.log($linkDOM.hasAttribute("data-description")); //false
 
+//ESTILOS DESDE JS:
+//OBTENER VALORES
+console.log($linkDOM.style);                  //CSSStyleDeclaration {0: 'background-color', 1: 'color', accentColor: '', ...}  
+//--> es un mapa que va a agregando todas las propiedades CSS validas, pero en formato lowerCamelCase (p.e backgroundColor)
+console.log($linkDOM.getAttribute("style"));  //background-color: aqua; color: blue;
+//--> con .getAttribute obtenemos lo que escribimos en este atributo style
+console.log($linkDOM.style.backgroundColor);  //aqua
+
+//NOTA: tambien podemos acceder a las propiedades CSS con Window:
+console.log(window.getComputedStyle($linkDOM)); 
+//aqui tambien se muestran el valor por defecto que el navegador le da a esa etiqueta html, al nivel de propiedades CSS
+
+//como es un metodo que cuelga de window tambien podemos hacer:
+console.log(getComputedStyle($linkDOM).getPropertyValue("color")); //rgb(0, 0, 255)
+
+//AGREGAR VALORES
+$linkDOM.style.setProperty("display", "block");
+$linkDOM.style.width = "50%";
+$linkDOM.style.padding = "1rem";
+$linkDOM.style.textAlign = "center";
+$linkDOM.style.setProperty("border-radius", ".5rem");
+$linkDOM.style.marginTop = "1rem";
+
+//VARIABLES CSS - CUSTOM PROPERTIES:
+const $html = document.documentElement;
+const $body = document.body;
+
+//ACCEDER
+let varDarkColor = getComputedStyle($html).getPropertyValue("--dark-color");
+let varYellowColor = getComputedStyle($html).getPropertyValue("--yellow-color");
+
+console.log(varDarkColor, varYellowColor); //#222 #f7df1e
+
+$body.style.backgroundColor = varDarkColor;
+$body.style.color = varYellowColor;
+
+//MODIFICAR
+$html.style.setProperty("--dark-color", "#000");
+varDarkColor = getComputedStyle($html).getPropertyValue("--dark-color");
+$body.style.setProperty("background-color", varDarkColor);
+
 console.clear();
-
-
 
