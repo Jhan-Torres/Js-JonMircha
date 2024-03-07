@@ -29,8 +29,6 @@ console.log(document.scripts);
 
 document.write("<h1>write from js</h1>"); //desfasado
 
-console.clear();
-
 /*
   nota: no confundir una etiqueta html con un nodo, ya que existen diferentes tipos de nodo y uno de ellos son las etiquetas html
   basicamente para interactuar con el dom solo nos va a interersar los nodos del tipo elemento (element_node) y los nodos del
@@ -50,9 +48,8 @@ console.log(document.querySelectorAll("a")); //para retornar todas las coinciden
 //para filtrar las listas que solo estan dentro del menu
 console.log(document.querySelectorAll("#menu li"));
 
-
+/* --------------------------------------------------------------------------------------------------------------------- */
 //INTERACTUAR CON LOS ATRIBUTOS DE ETIQUETAS HTML 
-
 //ACCEDER A LOS ATRIBUTOS
 //Existen 2 formas: notacion del punto "." y con .getAttribute(#attributeName)
 console.log(document.documentElement.lang);                 //en
@@ -69,7 +66,6 @@ console.log(document.documentElement.lang);                 //es
 
 document.documentElement.setAttribute("lang", "en");
 console.log(document.documentElement.lang);                 //en
-
 
 //GUARDAR UN NODO HTML EN UNA VARIABLE:
 /* 
@@ -94,6 +90,7 @@ $linkDOM.removeAttribute("target");
 console.log($linkDOM.hasAttribute("rel"));; //true
 
 
+/* --------------------------------------------------------------------------------------------------------------------- */
 //INTERACTUAR CON DATA-ATTRIBUTES DE ETIQUETAS HTML:
 /* 
   data attributes --> permite almacenar informacion extra en los nodos html o añadir atributos extra, solo se necesita
@@ -123,6 +120,8 @@ console.log($linkDOM.hasAttribute("data-description")); //true
 $linkDOM.removeAttribute("data-description");
 console.log($linkDOM.hasAttribute("data-description")); //false
 
+
+/* --------------------------------------------------------------------------------------------------------------------- */
 //ESTILOS DESDE JS:
 //OBTENER VALORES
 console.log($linkDOM.style);                  //CSSStyleDeclaration {0: 'background-color', 1: 'color', accentColor: '', ...}  
@@ -146,6 +145,8 @@ $linkDOM.style.textAlign = "center";
 $linkDOM.style.setProperty("border-radius", ".5rem");
 $linkDOM.style.marginTop = "1rem";
 
+
+/* --------------------------------------------------------------------------------------------------------------------- */
 //VARIABLES CSS - CUSTOM PROPERTIES:
 const $html = document.documentElement;
 const $body = document.body;
@@ -165,4 +166,42 @@ varDarkColor = getComputedStyle($html).getPropertyValue("--dark-color");
 $body.style.setProperty("background-color", varDarkColor);
 
 console.clear();
+
+
+/* --------------------------------------------------------------------------------------------------------------------- */
+//CLASES CSS DESDE JS
+const $card = document.querySelector(".card"); //primera "card" del DOM
+
+//Acceder al valor del atributo class:
+console.log($card.className);   //card
+console.log($card.classList);   //DOMTokenList ['card', value: 'card']
+
+//Evaluar si un nodo tiene una clase en particular:
+console.log($card.classList.contains("asd")); //false
+
+//Agregar una clase a un nodo:
+$card.classList.add("rotate-45"); 
+console.log($card.classList.contains("rotate-45"));   //true
+console.log($card.classList);                         //DOMTokenList(2) ['card', 'rotate-45', value: 'card rotate-45']
+
+//Quitar una clase de un nodo
+$card.classList.remove("rotate-45");
+console.log($card.classList.contains("rotate-45"));   //false
+
+//toggle class --> para añadir si no la tiene o eliminar si la tiene
+$card.classList.toggle("rotate-135"); //añade la clase
+$card.classList.toggle("rotate-135"); //quita la clase
+$card.classList.toggle("rotate-135"); //añade la clase
+
+//reemplazar una clase por otra
+$card.classList.replace("rotate-135", "rotate-45"); //el 1er parametro es la clase a reemplazar y el 2do es el valor
+
+//añadir, eliminar varias clases a la vez
+$card.classList.add("opacity-80", "sepia");
+$card.classList.remove("opacity-80", "sepia", "rotate-45");
+
+
+/* --------------------------------------------------------------------------------------------------------------------- */
+//TEXTO Y HTML DESDE JS
+
 
