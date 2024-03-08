@@ -165,8 +165,6 @@ $html.style.setProperty("--dark-color", "#000");
 varDarkColor = getComputedStyle($html).getPropertyValue("--dark-color");
 $body.style.setProperty("background-color", varDarkColor);
 
-console.clear();
-
 
 /* --------------------------------------------------------------------------------------------------------------------- */
 //CLASES CSS DESDE JS
@@ -203,5 +201,28 @@ $card.classList.remove("opacity-80", "sepia", "rotate-45");
 
 /* --------------------------------------------------------------------------------------------------------------------- */
 //TEXTO Y HTML DESDE JS
+const $whatIsDom = document.getElementById("que-es");
 
+let text = 
+`
+  <p>
+  El Modelo de Objetos del Documento (<b><i>DOM - Document Object Model </i></b>) es un                    
+  API para documentos HTML y XML.
+  </p>
+  <p>
+    Éste provée una representación estructural del documento, permitiendo modificar su contenido y presentación visual mediante código JS.
+  </p>
+  <p>
+  <mark> El DOM no es parte de la especificación de JavaScript, es una API para los navegadores.</mark>
+  </p>
+  `
+  $whatIsDom.innerText = text;  //innerText fue creado para trabajar con Internet Explorer, por lo que se considera desfasado
+  $whatIsDom.textContent = text;//agrega el texto pero sin respetar las etiquetas p.
+  $whatIsDom.innerHTML = text;  //reemplaza el contenido del nodo e inserta codigo HTML  
+  $whatIsDom.outerHTML = text;  //reemplaza todo (incluso el nodo) y lo reemplaza con lo que le especifiquemos
+  
+  console.clear();
+
+  /* --------------------------------------------------------------------------------------------------------------------- */
+//TEXTO Y HTML DESDE JS
 
