@@ -205,24 +205,49 @@ const $whatIsDom = document.getElementById("que-es");
 
 let text = 
 `
-  <p>
-  El Modelo de Objetos del Documento (<b><i>DOM - Document Object Model </i></b>) es un                    
-  API para documentos HTML y XML.
-  </p>
-  <p>
-    Éste provée una representación estructural del documento, permitiendo modificar su contenido y presentación visual mediante código JS.
-  </p>
-  <p>
-  <mark> El DOM no es parte de la especificación de JavaScript, es una API para los navegadores.</mark>
-  </p>
-  `
-  $whatIsDom.innerText = text;  //innerText fue creado para trabajar con Internet Explorer, por lo que se considera desfasado
-  $whatIsDom.textContent = text;//agrega el texto pero sin respetar las etiquetas p.
-  $whatIsDom.innerHTML = text;  //reemplaza el contenido del nodo e inserta codigo HTML  
-  $whatIsDom.outerHTML = text;  //reemplaza todo (incluso el nodo) y lo reemplaza con lo que le especifiquemos
-  
-  console.clear();
+<p>
+El Modelo de Objetos del Documento (<b><i>DOM - Document Object Model </i></b>) es un                    
+API para documentos HTML y XML.
+</p>
+<p>
+  Éste provée una representación estructural del documento, permitiendo modificar su contenido y presentación visual mediante código JS.
+</p>
+<p>
+<mark> El DOM no es parte de la especificación de JavaScript, es una API para los navegadores.</mark>
+</p>
+`
+$whatIsDom.innerText = text;  //innerText fue creado para trabajar con Internet Explorer, por lo que se considera desfasado
+$whatIsDom.textContent = text;//agrega el texto pero sin respetar las etiquetas p.
+$whatIsDom.innerHTML = text;  //reemplaza el contenido del nodo e inserta codigo HTML  
+$whatIsDom.outerHTML = text;  //reemplaza todo (incluso el nodo) y lo reemplaza con lo que le especifiquemos
 
-  /* --------------------------------------------------------------------------------------------------------------------- */
-//TEXTO Y HTML DESDE JS
+
+/* --------------------------------------------------------------------------------------------------------------------- */
+//DOM TRAVERSING: RECORRIENDO EL DOM (RECORRIDO DE ETIQUETAS HTML)
+const $cards = document.querySelector(".cards"); 
+
+console.log($cards);              //<section class="cards">...</section>
+console.log($cards.children);     //HTMLCollection(5) [figure.card, figure.card, figure.card, figure.card, figure.card]
+console.log($cards.children[2]);  //Para acceder a un hijo en particular --> "figure.card"
+console.log($cards.parentElement);//Retorna el nodo padre --> <body>...</body>
+console.log($cards.parentNode);   //Tambien retorna el padre --> <body>...</body>
+console.log($cards.firstChild);   //#text  --> en este caso el firstChild es un salto de linea (tambien se considera como nodos)
+console.log($cards.firstElementChild); //Acceder al primer nodo que sí es elemento html   --> <figure class="card">...</figure>
+console.log($cards.lastChild);    //#text  --> es un salto de linea (tambien se considera como nodos, pero no nodo html)
+console.log($cards.lastElementChild);  //Acceder al ultimo nodo que sí es elemento html   --> <figure class="card">...</figure>
+console.log($cards.previousSibling);//#text
+console.log($cards.previousElementSibling); //Retorna el nodo html hermano anterior -->  <a>...</a>
+console.log($cards.nextSibling);//#text
+console.log($cards.nextElementSibling);//Retorna el nodo html hermano posterior -->  <script>...</script>
+
+//NOTA: closest() -> metodo relativamente nuevo que busca el padre mas cercano del tipo de selector que especificamos
+console.log($cards.closest("div"));  // ->  null
+console.log($cards.closest("body")); // ->  <body>...</body>
+console.log($cards.children[2].closest("section") === $cards);  //true
+
+
+console.clear();
+
+/* --------------------------------------------------------------------------------------------------------------------- */
+//DOM: CREANDO ELEMENTOS Y FRAGMENTOS
 
